@@ -123,8 +123,7 @@ img {
 }
 
 .expDesc li {
-	list-style: disc;
-	list-style-position: outside;
+	
 	margin-bottom: 20px;
 	background-color: #ebeef0;
 	
