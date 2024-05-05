@@ -53,6 +53,14 @@ ORDER: Base + typography > general layout + grid > page layout > components
     opacity: 1;
     transform: translate(0); } }
 
+@keyframes moveSocials {
+  0% {
+    opacity: 0;
+    transform: translateY(30px); }
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
 *,
 *::after,
 *::before {
@@ -842,6 +850,34 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center; }
+
+.social.fc {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  animation-name: moveSocials;
+  animation-duration: 1s;
+  animation-timing-function: ease-out; }
+
+.social li {
+  font-size: 1.55em;
+  margin: 0 0.5em;
+  list-style: none; }
+
+.social a {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer; }
+
+.fab i,
+.far i {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px; }
 
 .navigation__checkbox {
   display: none; }
