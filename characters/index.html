@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+        <link rel="icon" href="../favicon.ico" sizes="any">
+        <link rel="icon" href="../icon.svg" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="../apple-touch-icon.png">    
+
+        <title>Characters | Julio Salvat</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/d9137117d7.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../css/style.css">        
+       
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-28663144-1"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-28663144-1');
+            </script>
+        <style>
+            body {
+                background-color: #f7f7f7;
+            }
+            .video-hero {
+                position: relative;
+                width: 100%;
+                height: 100vh;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .video-hero__video {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                min-width: 100%;
+                min-height: 100%;
+                width: auto;
+                height: auto;
+                transform: translateX(-50%) translateY(-50%);
+                z-index: 0;
+                object-fit: cover;
+            }
+            
+            .video-hero__overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+                z-index: 1;
+            }
+            
+            .video-hero__content {
+                position: relative;
+                z-index: 2;
+                text-align: center;
+                color: #fff;
+                padding: 2rem;
+                animation: fadeOutDelayed 1s ease-out 5s forwards;
+            }
+            
+            .video-hero__title {
+                font-size: 6rem;
+                font-weight: 700;
+                letter-spacing: 0.5rem;
+                text-transform: uppercase;
+                margin-bottom: 2rem;
+                animation: fadeInUp 1s ease-out;
+            }
+            
+            .video-hero__subtitle {
+                font-size: 2rem;
+                font-weight: 300;
+                letter-spacing: 0.2rem;
+                animation: fadeInUp 1s ease-out 0.3s both;
+            }
+            
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            @keyframes fadeOutDelayed {
+                from {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+            }
+
+            .section-about {
+                margin-top: -14vh;
+            }
+            
+            @media (max-width: 900px) {
+                .video-hero__title {
+                    font-size: 4rem;
+                }
+                .video-hero__subtitle {
+                    font-size: 1.6rem;
+                }
+            }
+            
+            .header__logo-box {
+                position: absolute;
+                top: 2rem;
+                left: 2rem;
+                z-index: 1000;
+            }
+            
+            .header__logo {
+                height: 12rem;
+            }
+            
+            .profilePic {
+                position: absolute;
+                bottom: -7rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 15rem;
+                height: 15rem;
+                border-radius: 50%;
+                border: 3px solid #fff;
+                box-shadow: 0 1rem 2rem rgba(0,0,0,0.3);
+                z-index: 3;
+                background-color: #00b2ff;
+                animation: none !important;
+                    transition: none !important;
+                    display: block;
+                    margin-top:30px;
+            }
+            
+            @media (max-width: 600px) {
+                .video-hero {
+                    height: 100vh;
+                    margin-bottom: -5rem;
+                }
+                .profilePic {
+                    width: 20rem;
+                    height: 20rem;
+                    bottom: 21rem;
+                    animation: none !important;
+                    transition: none !important;
+                    display: block;
+
+                  }
+                .video-hero__title {
+                    font-size: 3rem;
+                    letter-spacing: 0.2rem;
+                }
+                .video-hero__subtitle {
+                    font-size: 1.4rem;
+                }
+                .video-hero__video {
+                    transform: translateX(-50%) translateY(-50%) scale(0.6);
+                    top: 34%;
+                    min-height: 100vh;
+                }
+
+                .video-hero__overlay {
+                    height: 69%;
+                }
+
+                .header__logo-box {
+                    top: 1rem;
+                    left: 1rem;
+                }
+                .header__logo {
+                    height: 12rem;
+                }                
+
+                .section-about {
+                background-color: #f7f7f7;
+                padding: 25rem 0;
+                margin-top: -15vh;
+                padding-top:5px;
+                }
+
+            }
+        </style>
+    </head>
+    <body>
+        <div class="navigation">
+            <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+
+            <label for="navi-toggle" class="navigation__button">
+                <span class="navigation__icon">&nbsp;</span>
+            </label>
+
+            <div class="navigation__background">&nbsp;</div>
+
+            <nav class="navigation__nav" id="myLink">
+                <ul class="navigation__list">
+                    <li class="navigation__item"><a href="/#about" class="navigation__link"><span>01</span>About</a></li>
+                    <li class="navigation__item"><a href="/#experience" class="navigation__link"><span>02</span>Experience</a></li>
+                    <li class="navigation__item"><a href="/#work" class="navigation__link"><span>03</span>Work</a></li>
+                    <li class="navigation__item"><a href="/characters" class="navigation__link"><span>04</span>Characters</a></li>
+                    <li class="navigation__item"><a href="https://docs.google.com/document/d/1tZZN1nZQJm8iqCBtq3CQUeT3_z-C_UNji-mWtqlMhcM/edit?usp=sharing" target="_blank" class="navigation__link"><span>05</span>Download Resume</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <div class="header__logo-box">
+            <img src="../img/jslogo.png" alt="Logo" class="header__logo"/>
+        </div>
+        
+        <div class="video-hero">
+            <video autoplay muted loop playsinline class="video-hero__video">
+                <source src="https://hosting-content.s3.us-east-1.amazonaws.com/characters_2d.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-hero__overlay"></div>
+            <div class="video-hero__content">
+                <h1 class="video-hero__title">Characters</h1>
+                <p class="video-hero__subtitle">Bringing Stories to Life</p>
+            </div>            
+        </div>
+        
+        <main>
+            <section class="section-about">
+                <div>
+                    <img src="../img/julio.png" alt="Profile Pic" class="profilePic"/>
+                </div>
+                <div class="u-center-text u-margin-bottom-big">
+                    
+                    <h2 class="heading-secondary">
+                        Character Design & Animation
+                    </h2>
+                </div>
+
+                <div class="row">
+                    <div class="col-1-of-2">
+                        <h3 class="heading-tertiary u-margin-bottom-small">Digital Art & Animation</h3>
+                        <p class="paragraph">
+                            Creating unique characters that tell stories through movement and expression. Each character is carefully crafted with attention to personality, movement, and visual appeal.
+                        </p>
+
+                        <h3 class="heading-tertiary u-margin-bottom-small">From Concept to Animation</h3>
+                        <p class="paragraph">
+                            My process involves conceptualization, character design, rigging, and animation - bringing ideas to life through motion and personality.
+                        </p>
+
+                        <a href="/" class="btn-text">&larr; Back to Home</a>
+                    </div>
+                    <div class="col-1-of-2">
+                        <div class="composition">
+                            <p class="paragraph">
+                                Each character is designed with purpose, whether for games, animations, or interactive experiences. The goal is always to create memorable, engaging characters that connect with audiences.
+                            </p>
+                            <p class="paragraph">
+                                Using tools like After Effects, Procreate, and various animation software, I bring these characters to life with fluid motion and expressive animation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer__logo-box">
+                <img src="../img/jslogo.png" alt="Full logo" class="footer__logo">
+            </div>
+            <div class="row">
+                <div class="col-1-of-2">
+                    <div class="footer__navigation">
+                        <ul class="footer__list">
+                            <li class="footer__item"><a href="/" class="footer__link">Home</a></li>
+                            <li class="footer__item"><a href="/#about" class="footer__link">About</a></li>
+                            <li class="footer__item"><a href="/#experience" class="footer__link">Experience</a></li>
+                            <li class="footer__item"><a href="/#work" class="footer__link">Work</a></li>
+                            <li class="footer__item"><a href="/characters" class="footer__link">Characters</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-1-of-2">
+                    <p class="footer__copyright">
+                        Built by <a href="/" class="footer__link">Julio Salvat</a>. Copyright &copy; by Julio Salvat.
+                    </p>
+                </div>
+            </div>
+        </footer>
+        
+        <script src="../js/script.js"></script>
+    </body>
+</html>
