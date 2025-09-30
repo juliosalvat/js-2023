@@ -39,13 +39,11 @@
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                min-width: 100%;
-                min-height: 100%;
-                width: auto;
-                height: auto;
+                width: 100%;
+                height: 100%;
                 transform: translateX(-50%) translateY(-50%);
                 z-index: 0;
-                object-fit: cover;
+                object-fit: contain;
             }
             
             .video-hero__overlay {
@@ -116,6 +114,18 @@
                 .video-hero__subtitle {
                     font-size: 1.6rem;
                 }
+                .video-hero {
+                    height: 70vh;
+                }
+                .video-hero__video {
+                    object-fit: contain;
+                }
+            }
+            
+            @media (max-width: 768px) {
+                .video-hero {
+                    height: 50vh;
+                }
             }
             
             .header__logo-box {
@@ -148,14 +158,32 @@
             }
             
             @media (max-width: 600px) {
+
+                .navigation__icon  {
+                    margin-top: 2.5rem;
+                }
+
+                .navigation__button {
+                    height: 5rem;
+                    width: 5rem;
+                    top: 2rem;
+                    right: 1rem;
+                }
+
+                .navigation__background {
+                    top: 1.5rem;
+                    right: .5rem;
+                }
+ 
+
                 .video-hero {
-                    height: 100vh;
+                    height: 60vh;
                     margin-bottom: -5rem;
                 }
                 .profilePic {
-                    width: 20rem;
-                    height: 20rem;
-                    bottom: -20rem;
+                    width: 12rem;
+                    height: 12rem;
+                    bottom: 42rem;
                     animation: none !important;
                     transition: none !important;
                     display: block;
@@ -169,13 +197,14 @@
                     font-size: 1.4rem;
                 }
                 .video-hero__video {
-                    transform: translateX(-50%) translateY(-50%) scale(0.8);
-                    top: 47%;
-                    min-height: 100vh;
+                    width: 100%;
+                    height: 100%;
+                    top:23%;
+                    object-fit: contain;
                 }
 
                 .video-hero__overlay {
-                    height: 100%;
+                    display:none;
                 }
 
                 .header__logo-box {
@@ -183,13 +212,19 @@
                     left: 1rem;
                 }
                 .header__logo {
-                    height: 12rem;
-                }                
+                    height: 6rem;
+                    margin-top: 5px;
+                    margin-left:
+                }      
+                
+                .video-hero__content {
+                    top:-20%;
+                }
 
                 .section-about {
                 background-color: #f7f7f7;
                 padding: 25rem 0;
-                margin-top: 15vh;
+                margin-top: -15vh;
                 padding-top:5px;
                 }
 
@@ -234,10 +269,11 @@
         </div>
         
         <main>
-            <section class="section-about">
-                <div>
+             <div>
                     <img src="../img/julio.png" alt="Profile Pic" class="profilePic"/>
                 </div>
+            <section class="section-about">
+               
                 <div class="u-center-text u-margin-bottom-big">
                     
                     <h2 class="heading-secondary">
