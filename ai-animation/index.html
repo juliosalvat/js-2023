@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../favicon.ico" sizes="any">
+        <link rel="icon" href="../icon.svg" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+        <title>AI Animation | Julio Salvat</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/d9137117d7.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../css/style.css">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-28663144-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-28663144-1');
+        </script>
+
+        <style>
+            :root {
+                --js-accent: #00b2ff;
+                --js-accent-dark: #0089c7;
+                --js-bg: #f7f7f7;
+                --js-surface: #ffffff;
+                --js-ink: #1a1a1a;
+                --js-muted: #6e6e6e;
+                --js-radius: 14px;
+                --js-shadow-sm: 0 1px 2px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.06);
+                --js-shadow-lg: 0 10px 30px rgba(0, 178, 255, .18), 0 4px 12px rgba(0,0,0,.08);
+                --js-ease: cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            html { scroll-behavior: smooth; }
+            body {
+                background-color: var(--js-bg);
+                font-family: "Lato", sans-serif;
+            }
+
+            /* Logo */
+            .header__logo-box {
+                position: absolute;
+                top: 2rem;
+                left: 2rem;
+                z-index: 1000;
+            }
+            .header__logo {
+                height: 12rem;
+                margin-left: 10px;
+            }
+
+            /* Hero ----------------------------------------------------- */
+            .ai-hero {
+                position: relative;
+                width: 100%;
+                min-height: 70vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                background:
+                    radial-gradient(1200px 600px at 20% 10%, rgba(0,178,255,.45), transparent 60%),
+                    radial-gradient(900px 500px at 80% 90%, rgba(0,89,160,.55), transparent 60%),
+                    linear-gradient(135deg, #001a2e 0%, #003a5c 50%, #00b2ff 100%);
+                color: #fff;
+                isolation: isolate;
+            }
+
+            .ai-hero::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-image:
+                    linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+                background-size: 60px 60px;
+                mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+                -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+                opacity: .5;
+                z-index: 0;
+                animation: gridShift 30s linear infinite;
+            }
+
+            @keyframes gridShift {
+                from { background-position: 0 0, 0 0; }
+                to   { background-position: 60px 60px, 60px 60px; }
+            }
+
+            .ai-hero__inner {
+                position: relative;
+                z-index: 2;
+                text-align: center;
+                padding: 4rem 2rem;
+                animation: fadeInUp 1s var(--js-ease) both;
+            }
+
+            .ai-hero__eyebrow {
+                display: inline-block;
+                padding: .5rem 1.1rem;
+                font-size: 1.1rem;
+                font-weight: 700;
+                letter-spacing: .35rem;
+                text-transform: uppercase;
+                background: rgba(255,255,255,.08);
+                border: 1px solid rgba(255,255,255,.2);
+                border-radius: 999px;
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                margin-bottom: 1.6rem;
+            }
+
+            .ai-hero__title {
+                font-size: clamp(3rem, 7vw, 6.5rem);
+                font-weight: 900;
+                letter-spacing: .4rem;
+                text-transform: uppercase;
+                margin: 0 0 1.2rem;
+                line-height: 1;
+                text-shadow: 0 4px 24px rgba(0,0,0,.35);
+                background: linear-gradient(180deg, #fff 0%, #cfeeff 100%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+
+            .ai-hero__subtitle {
+                font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+                font-weight: 300;
+                letter-spacing: .2rem;
+                opacity: .9;
+                max-width: 720px;
+                margin: 0 auto 2.4rem;
+                text-shadow: 1px 1px 2px rgba(0,0,0,.4);
+            }
+
+            .ai-hero__cta {
+                display: inline-flex;
+                align-items: center;
+                gap: .7rem;
+                padding: 1rem 2rem;
+                background: #fff;
+                color: var(--js-accent-dark);
+                font-weight: 700;
+                letter-spacing: .1rem;
+                text-decoration: none;
+                text-transform: uppercase;
+                font-size: 1rem;
+                border-radius: 999px;
+                transition: transform .3s var(--js-ease), box-shadow .3s var(--js-ease);
+                box-shadow: 0 10px 24px rgba(0,0,0,.25);
+            }
+            .ai-hero__cta:hover {
+                transform: translateY(-3px) scale(1.03);
+                box-shadow: 0 14px 30px rgba(0,0,0,.35);
+                color: var(--js-accent-dark);
+            }
+
+            .ai-hero__scroll {
+                position: absolute;
+                bottom: 1.6rem;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 2;
+                color: rgba(255,255,255,.7);
+                font-size: 1.4rem;
+                animation: bob 2.4s var(--js-ease) infinite;
+            }
+            @keyframes bob {
+                0%, 100% { transform: translate(-50%, 0); }
+                50%      { transform: translate(-50%, 8px); }
+            }
+            @keyframes fadeInUp {
+                from { opacity: 0; transform: translateY(30px); }
+                to   { opacity: 1; transform: translateY(0); }
+            }
+
+            /* Gallery ------------------------------------------------ */
+            .gallery-section {
+                padding: 6rem 0 7rem;
+            }
+
+            .gallery-intro {
+                text-align: center;
+                max-width: 760px;
+                margin: 0 auto 4rem;
+            }
+            .gallery-intro p {
+                font-size: 1.15rem;
+                color: var(--js-muted);
+                line-height: 1.7;
+            }
+
+            /* Filter / toolbar */
+            .gallery-toolbar {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 2.5rem;
+                padding: 1rem 1.25rem;
+                background: var(--js-surface);
+                border-radius: var(--js-radius);
+                box-shadow: var(--js-shadow-sm);
+            }
+            .gallery-search {
+                position: relative;
+                flex: 1 1 280px;
+                max-width: 420px;
+            }
+            .gallery-search i {
+                position: absolute;
+                top: 50%;
+                left: 1rem;
+                transform: translateY(-50%);
+                color: var(--js-muted);
+                font-size: 1rem;
+            }
+            .gallery-search input {
+                width: 100%;
+                padding: .85rem 1rem .85rem 2.6rem;
+                border: 1px solid #e3e3e3;
+                border-radius: 999px;
+                font-size: 1rem;
+                font-family: inherit;
+                background: #fafafa;
+                transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+            }
+            .gallery-search input:focus {
+                outline: none;
+                border-color: var(--js-accent);
+                background: #fff;
+                box-shadow: 0 0 0 4px rgba(0,178,255,.15);
+            }
+            .gallery-count {
+                font-size: .95rem;
+                color: var(--js-muted);
+                font-weight: 600;
+                letter-spacing: .05rem;
+                white-space: nowrap;
+            }
+            .gallery-count strong {
+                color: var(--js-accent-dark);
+            }
+
+            /* Video grid — own CSS Grid to avoid collision with site's .row/.col- rules */
+            .video-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.75rem;
+                width: 100%;
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 0;
+                justify-items: stretch;
+            }
+            @media (max-width: 768px) {
+                .video-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1.25rem;
+                    max-width: 520px;
+                }
+            }
+
+            /* Footer — restore site's .row centering after Bootstrap overrides it */
+            .footer .row {
+                display: block;
+                margin: 0 auto;
+                --bs-gutter-x: 0;
+                --bs-gutter-y: 0;
+            }
+            .footer .row::after { content: ""; display: table; clear: both; }
+
+            /* Video card */
+            .video-card {
+                position: relative;
+                border-radius: var(--js-radius);
+                overflow: hidden;
+                background: #000;
+                cursor: pointer;
+                box-shadow: var(--js-shadow-sm);
+                transition: transform .4s var(--js-ease), box-shadow .4s var(--js-ease);
+                aspect-ratio: 16 / 10;
+                border: none;
+                padding: 0;
+                width: 100%;
+                display: block;
+            }
+            .video-card:hover,
+            .video-card:focus-visible {
+                transform: translateY(-6px);
+                box-shadow: var(--js-shadow-lg);
+                outline: none;
+            }
+            .video-card:focus-visible {
+                box-shadow: var(--js-shadow-lg), 0 0 0 4px rgba(0,178,255,.4);
+            }
+
+            .video-card__media {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                background: #000;
+                transition: transform .8s var(--js-ease), filter .4s ease;
+            }
+            .video-card:hover .video-card__media {
+                transform: scale(1.06);
+                filter: brightness(1.05);
+            }
+
+            .video-card__overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(180deg,
+                    rgba(0,0,0,0) 40%,
+                    rgba(0,0,0,.85) 100%);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 1.2rem 1.3rem;
+                color: #fff;
+                pointer-events: none;
+            }
+
+            .video-card__play {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(.9);
+                width: 5rem;
+                height: 5rem;
+                border-radius: 50%;
+                background: rgba(255,255,255,.92);
+                color: var(--js-accent-dark);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.6rem;
+                padding-left: 6px;
+                box-shadow: 0 8px 24px rgba(0,0,0,.4);
+                opacity: 0;
+                transition: opacity .35s var(--js-ease), transform .35s var(--js-ease);
+                pointer-events: none;
+            }
+            .video-card:hover .video-card__play,
+            .video-card:focus-visible .video-card__play {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            .video-card__title {
+                font-size: 1.15rem;
+                font-weight: 700;
+                letter-spacing: .04rem;
+                margin: 0;
+                text-transform: capitalize;
+                text-shadow: 0 2px 8px rgba(0,0,0,.5);
+            }
+            .video-card__meta {
+                display: inline-flex;
+                align-items: center;
+                gap: .5rem;
+                font-size: .8rem;
+                font-weight: 600;
+                letter-spacing: .15rem;
+                text-transform: uppercase;
+                color: var(--js-accent);
+                margin-bottom: .35rem;
+            }
+            .video-card__meta::before {
+                content: "";
+                width: 22px;
+                height: 2px;
+                background: var(--js-accent);
+                display: inline-block;
+            }
+
+            .video-card__badge {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                background: rgba(0,0,0,.55);
+                color: #fff;
+                font-size: .7rem;
+                letter-spacing: .1rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                padding: .3rem .65rem;
+                border-radius: 999px;
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
+                display: inline-flex;
+                align-items: center;
+                gap: .35rem;
+                z-index: 2;
+            }
+            .video-card__badge i {
+                color: var(--js-accent);
+            }
+
+            /* Empty state */
+            .gallery-empty {
+                display: none;
+                text-align: center;
+                padding: 4rem 1rem;
+                color: var(--js-muted);
+            }
+            .gallery-empty i {
+                font-size: 3rem;
+                color: var(--js-accent);
+                margin-bottom: 1rem;
+                display: block;
+            }
+            .gallery-empty.is-visible { display: block; }
+
+            /* Player modal -------------------------------------------- */
+            .video-modal .modal-content {
+                background: #0a0a0a;
+                border: none;
+                border-radius: var(--js-radius);
+                overflow: hidden;
+                color: #fff;
+            }
+            .video-modal .modal-header {
+                background: linear-gradient(180deg, rgba(0,0,0,.85), rgba(0,0,0,0));
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 5;
+                border: none;
+                padding: 1rem 1.4rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .video-modal .modal-title {
+                font-size: 1.1rem;
+                font-weight: 700;
+                letter-spacing: .15rem;
+                text-transform: uppercase;
+                margin: 0;
+                color: #fff;
+            }
+            .video-modal .btn-close-custom {
+                width: 2.4rem;
+                height: 2.4rem;
+                border-radius: 50%;
+                background: rgba(255,255,255,.12);
+                border: 1px solid rgba(255,255,255,.18);
+                color: #fff;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.1rem;
+                cursor: pointer;
+                transition: background .25s ease, transform .25s ease;
+            }
+            .video-modal .btn-close-custom:hover {
+                background: rgba(255,255,255,.22);
+                transform: rotate(90deg);
+            }
+            .video-modal .modal-body {
+                padding: 0;
+                background: #000;
+            }
+            .video-modal video {
+                width: 100%;
+                max-height: 85vh;
+                display: block;
+                background: #000;
+            }
+            .video-modal .modal-dialog {
+                max-width: 1100px;
+            }
+
+            /* Section heading: keep theme echo */
+            .section-heading {
+                text-align: center;
+                font-size: 3rem;
+                font-weight: 700;
+                letter-spacing: .3rem;
+                text-transform: uppercase;
+                background: linear-gradient(135deg, var(--js-accent) 0%, #006b9c 100%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                margin-bottom: 1.5rem;
+            }
+
+            /* Responsive tweaks ------------------------------------- */
+            @media (max-width: 992px) {
+                .header__logo { height: 9rem; }
+            }
+            @media (max-width: 768px) {
+                .ai-hero { min-height: 60vh; }
+                .gallery-section { padding: 4rem 0 5rem; }
+                .section-heading { font-size: 2.2rem; letter-spacing: .15rem; }
+                .header__logo { height: 7rem; }
+                .header__logo-box { top: 1rem; left: 1rem; }
+            }
+            @media (max-width: 600px) {
+                .navigation__icon { margin-top: 2.5rem; }
+                .navigation__button {
+                    height: 5rem; width: 5rem;
+                    top: 2rem; right: 1rem;
+                }
+                .navigation__background { top: 1.5rem; right: .5rem; }
+                .header__logo { height: 5.5rem; }
+                .ai-hero__title { letter-spacing: .2rem; }
+                .video-card__play { width: 4rem; height: 4rem; font-size: 1.2rem; }
+            }
+
+            /* Reduced motion */
+            @media (prefers-reduced-motion: reduce) {
+                .ai-hero::before { animation: none; }
+                .ai-hero__scroll { animation: none; }
+                .video-card,
+                .video-card__media,
+                .video-card__play { transition: none; }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="navigation">
+            <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+            <label for="navi-toggle" class="navigation__button">
+                <span class="navigation__icon">&nbsp;</span>
+            </label>
+            <div class="navigation__background">&nbsp;</div>
+            <nav class="navigation__nav" id="myLink">
+                <ul class="navigation__list">
+                    <li class="navigation__item"><a href="/#about" class="navigation__link"><span>01</span>About</a></li>
+                    <li class="navigation__item"><a href="/#experience" class="navigation__link"><span>02</span>Experience</a></li>
+                    <li class="navigation__item"><a href="/#work" class="navigation__link"><span>03</span>Work</a></li>
+                    <li class="navigation__item"><a href="/characters" class="navigation__link"><span>04</span>Characters</a></li>
+                    <li class="navigation__item"><a href="/ai-animation" class="navigation__link"><span>05</span>AI Animation</a></li>
+                    <li class="navigation__item"><a href="https://docs.google.com/document/d/1tZZN1nZQJm8iqCBtq3CQUeT3_z-C_UNji-mWtqlMhcM/edit?usp=sharing" target="_blank" class="navigation__link"><span>06</span>Download Resume</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="header__logo-box">
+            <a href="/"><img src="../img/jslogo.png" alt="Logo" class="header__logo"/></a>
+        </div>
+
+        <!-- HERO ============================================ -->
+        <section class="ai-hero" role="banner">
+            <div class="ai-hero__inner">
+                <span class="ai-hero__eyebrow">AI Animation Reel</span>
+                <h1 class="ai-hero__title">AI Animation</h1>
+                <p class="ai-hero__subtitle">
+                    A collection of experimental shorts, character animations, and motion studies generated and directed with AI tooling.
+                </p>
+                <a href="#gallery" class="ai-hero__cta">
+                    <i class="fas fa-play"></i> Browse the reel
+                </a>
+            </div>
+            <a href="#gallery" class="ai-hero__scroll" aria-label="Scroll to gallery">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </section>
+
+        <!-- GALLERY ========================================== -->
+        <main>
+            <section id="gallery" class="gallery-section">
+                <div class="container">
+                    <div class="gallery-intro">
+                        <h2 class="section-heading">The Reel</h2>
+                        <p>
+                            Each piece below is an exploration of character, motion, and storytelling — built with a hybrid of AI models, traditional animation principles, and a lot of iteration. Hover any tile to preview, or click to play full-screen.
+                        </p>
+                    </div>
+
+                    <div class="gallery-toolbar">
+                        <div class="gallery-search">
+                            <i class="fas fa-search"></i>
+                            <input id="video-search" type="search" placeholder="Search animations..." aria-label="Search animations">
+                        </div>
+                        <div class="gallery-count">
+                            Showing <strong id="visible-count">0</strong> of <strong id="total-count">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="video-grid" id="video-grid">
+                        <!-- Cards injected via JS -->
+                    </div>
+
+                    <div class="gallery-empty" id="gallery-empty">
+                        <i class="fas fa-film"></i>
+                        <h3>No matching animations</h3>
+                        <p>Try a different search term.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- MODAL ============================================ -->
+        <div class="modal fade video-modal" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="videoModalLabel">Playing</h5>
+                        <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <video id="modal-video" controls playsinline preload="metadata"></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      <footer class="footer">
+            <div class="footer__logo-box">
+                <img src="../img/jslogo.png" alt="Full logo" class="footer__logo">
+            </div>
+            <div class="row">
+                <div class="col-1-of-2">
+                    <div class="footer__navigation">
+                        <ul class="footer__list">
+                            <li class="footer__item"><a href="/" class="footer__link">Home</a></li>
+                            <li class="footer__item"><a href="/#about" class="footer__link">About</a></li>
+                            <li class="footer__item"><a href="/#experience" class="footer__link">Experience</a></li>
+                            <li class="footer__item"><a href="/#work" class="footer__link">Work</a></li>
+                            <li class="footer__item"><a href="/characters" class="footer__link">Characters</a></li>
+                            <li class="footer__item"><a href="/ai-animation" class="footer__link">AI Animation</a></li>                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-1-of-2">
+                    <p class="footer__copyright">
+                        Built by <a href="/" class="footer__link">Julio Salvat</a> | 
+                        <a href="https://docs.google.com/document/d/1tZZN1nZQJm8iqCBtq3CQUeT3_z-C_UNji-mWtqlMhcM/edit?usp=sharing" target="_blank" class="footer__link">Resume</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <script src="../js/script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+        <script>
+        (function() {
+            'use strict';
+
+            // ====== Video manifest ======
+            const VIDEO_BASE = '../video/';
+            const VIDEOS = [
+                'a_a_sapo.MP4',
+                'a_b_greenTreefrog.mp4',
+                'a_babyDragon.mp4',
+                'a_inmate.mp4',
+                'a_RETF2.MP4',
+                'a_terror.mp4',
+                'assasin.mp4',
+                'b_searching.mp4',
+                'balarina.mp4',
+                'bike.mp4',
+                'CON.mp4',
+                'devSapo.mp4',
+                'DSapoTalk.mp4',
+                'FuFrog.mp4',
+                'graf.mp4',
+                'guard.mp4',
+                'jimmy.mp4',
+                'kidSapo.mp4',
+                'ladySapo.mp4',
+                'lilDude.mp4',
+                'lizardRunning.mp4',
+                'M_sapoTalk.mp4',
+                'meerKat.mp4',
+                'puggish.mp4',
+                'rabbit.mp4',
+                'raffa.mp4',
+                'redEyeTreeFrog.mp4',
+                'sapi.mp4',
+                'sapo.mp4',
+                'sapoEating.mp4',
+                'SapoTalk.mp4',
+                'spaceDude.mp4',
+                'superDude.mp4',
+                'treefrog_a.mp4'
+            ];
+
+            // Filename -> nicer display title
+            function prettyTitle(filename) {
+                let name = filename.replace(/\.[^/.]+$/, '');
+                name = name.replace(/^[a-z]_/i, '');           // drop "a_", "b_", etc.
+                name = name.replace(/[_-]+/g, ' ');             // separators to spaces
+                name = name.replace(/([a-z])([A-Z])/g, '$1 $2');// camelCase split
+                name = name.replace(/\s+/g, ' ').trim();
+                if (!name) return filename;
+                // Title case
+                return name.split(' ')
+                    .map(w => w.length <= 3 && w === w.toUpperCase()
+                        ? w
+                        : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+                    .join(' ');
+            }
+
+            const grid = document.getElementById('video-grid');
+            const emptyState = document.getElementById('gallery-empty');
+            const searchInput = document.getElementById('video-search');
+            const visibleCount = document.getElementById('visible-count');
+            const totalCount = document.getElementById('total-count');
+
+            const modalEl = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modal-video');
+            const modalTitle = document.getElementById('videoModalLabel');
+            const bsModal = new bootstrap.Modal(modalEl);
+
+            // Build grid
+            const cards = VIDEOS.map((filename, idx) => {
+                const title = prettyTitle(filename);
+                const src = VIDEO_BASE + encodeURIComponent(filename);
+
+                const col = document.createElement('div');
+                col.className = 'video-grid__item';
+                col.dataset.title = title.toLowerCase();
+                col.dataset.filename = filename.toLowerCase();
+
+                col.innerHTML = `
+                    <button type="button" class="video-card" aria-label="Play ${title}" data-src="${src}" data-title="${title}">
+                        <span class="video-card__badge"><i class="fas fa-robot"></i> AI</span>
+                        <video class="video-card__media"
+                               src="${src}#t=0.5"
+                               preload="metadata"
+                               muted
+                               loop
+                               playsinline
+                               disablePictureInPicture
+                               disableRemotePlayback
+                               aria-hidden="true"></video>
+                        <span class="video-card__play" aria-hidden="true"><i class="fas fa-play"></i></span>
+                        <span class="video-card__overlay">
+                            <span class="video-card__meta">Animation ${String(idx + 1).padStart(2, '0')}</span>
+                            <h3 class="video-card__title">${title}</h3>
+                        </span>
+                    </button>
+                `;
+                return col;
+            });
+
+            cards.forEach(c => grid.appendChild(c));
+            totalCount.textContent = VIDEOS.length;
+            visibleCount.textContent = VIDEOS.length;
+
+            // Hover-to-preview on devices with hover capability
+            const supportsHover = window.matchMedia('(hover: hover)').matches;
+            if (supportsHover) {
+                grid.addEventListener('mouseover', e => {
+                    const card = e.target.closest('.video-card');
+                    if (!card) return;
+                    const v = card.querySelector('video');
+                    if (v && v.paused) v.play().catch(() => { /* autoplay blocked, ignore */ });
+                });
+                grid.addEventListener('mouseout', e => {
+                    const card = e.target.closest('.video-card');
+                    if (!card) return;
+                    const related = e.relatedTarget;
+                    if (related && card.contains(related)) return;
+                    const v = card.querySelector('video');
+                    if (v) {
+                        v.pause();
+                        try { v.currentTime = 0.5; } catch (_) {}
+                    }
+                });
+            }
+
+            // Click to open modal
+            grid.addEventListener('click', e => {
+                const card = e.target.closest('.video-card');
+                if (!card) return;
+                const src = card.getAttribute('data-src');
+                const title = card.getAttribute('data-title');
+
+                modalTitle.textContent = title;
+                modalVideo.src = src;
+                bsModal.show();
+                // play after the modal is fully shown to avoid race with transitions
+                modalEl.addEventListener('shown.bs.modal', function handler() {
+                    modalVideo.play().catch(() => {});
+                    modalEl.removeEventListener('shown.bs.modal', handler);
+                });
+            });
+
+            // Clean up when modal closes
+            modalEl.addEventListener('hidden.bs.modal', () => {
+                modalVideo.pause();
+                modalVideo.removeAttribute('src');
+                modalVideo.load();
+            });
+
+            // Search filter
+            let searchTimer;
+            searchInput.addEventListener('input', () => {
+                clearTimeout(searchTimer);
+                searchTimer = setTimeout(applyFilter, 120);
+            });
+
+            function applyFilter() {
+                const term = searchInput.value.trim().toLowerCase();
+                let shown = 0;
+                cards.forEach(col => {
+                    const match = !term
+                        || col.dataset.title.includes(term)
+                        || col.dataset.filename.includes(term);
+                    col.style.display = match ? '' : 'none';
+                    if (match) shown++;
+                });
+                visibleCount.textContent = shown;
+                emptyState.classList.toggle('is-visible', shown === 0);
+            }
+
+            // Keyboard: press "/" to focus search
+            document.addEventListener('keydown', e => {
+                if (e.key === '/' && document.activeElement !== searchInput) {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+            });
+        })();
+        </script>
+    </body>
+</html>
