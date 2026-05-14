@@ -65,10 +65,11 @@
                 align-items: center;
                 justify-content: center;
                 overflow: hidden;
-                background:
-                    radial-gradient(1200px 600px at 20% 10%, rgba(0,178,255,.45), transparent 60%),
-                    radial-gradient(900px 500px at 80% 90%, rgba(0,89,160,.55), transparent 60%),
-                    linear-gradient(135deg, #001a2e 0%, #003a5c 50%, #00b2ff 100%);
+                background-image:
+                    linear-gradient(to right bottom, rgba(114, 182, 251, 0.8), rgba(5, 29, 52, 0.8)),
+                    url(../img/hero.jpg);
+                background-size: cover;
+                background-position: top;
                 color: #fff;
                 isolation: isolate;
             }
@@ -475,12 +476,23 @@
             }
             .video-modal video {
                 width: 100%;
-                max-height: 85vh;
+                height: 100%;
                 display: block;
                 background: #000;
+                object-fit: contain;
             }
             .video-modal .modal-dialog {
-                max-width: 1100px;
+                max-width: 100vw;
+                width: 100%;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: calc(100vh - 1rem);
+            }
+            .video-modal .modal-content {
+                width: 100%;
+                aspect-ratio: 16 / 9; /* JS overrides once metadata loads */
             }
 
             /* Section heading: keep theme echo */
@@ -779,7 +791,34 @@
                 });
             }
 
-            // Click to open modal
+            // Size the modal to the video's actual aspect ratio so there are no black bars
+            const modalContent = modalEl.querySelector('.modal-content');
+            function fitModalToVideo() {
+                const ratio = modalVideo.videoWidth / modalVideo.videoHeight;
+                if (!ratio || !isFinite(ratio)) return;
+                // available viewport box (leave a little breathing room)
+                const maxH = window.innerHeight * 0.92;
+                const maxW = window.innerWidth * 0.95;
+                let w, h;
+                // start from height, see if width fits; otherwise start from width
+                h = maxH;
+                w = h * ratio;
+                if (w > maxW) {
+                    w = maxW;
+                    h = w / ratio;
+                }
+                modalContent.style.width = w + 'px';
+                modalContent.style.height = h + 'px';
+                modalContent.style.aspectRatio = ratio;
+            }
+            modalVideo.addEventListener('loadedmetadata', fitModalToVideo);
+            window.addEventListener('resize', () => {
+                if (modalEl.classList.contains('show')) fitModalToVideo();
+            });
+
+            // Click to open modal — start playback synchronously inside the user gesture
+            // so the browser keeps audio enabled. Calling .play() after Bootstrap's fade
+            // transition can lose user activation and force a silent-autoplay fallback.
             grid.addEventListener('click', e => {
                 const card = e.target.closest('.video-card');
                 if (!card) return;
@@ -787,13 +826,19 @@
                 const title = card.getAttribute('data-title');
 
                 modalTitle.textContent = title;
+                modalVideo.muted = false;
+                modalVideo.volume = 1;
+                // reset sizing so loadedmetadata fires a fresh fit
+                modalContent.style.width = '';
+                modalContent.style.height = '';
                 modalVideo.src = src;
+                modalVideo.load();
+                // start play inside the click handler so audio is allowed
+                const playPromise = modalVideo.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => { /* user can press the play button */ });
+                }
                 bsModal.show();
-                // play after the modal is fully shown to avoid race with transitions
-                modalEl.addEventListener('shown.bs.modal', function handler() {
-                    modalVideo.play().catch(() => {});
-                    modalEl.removeEventListener('shown.bs.modal', handler);
-                });
             });
 
             // Clean up when modal closes
