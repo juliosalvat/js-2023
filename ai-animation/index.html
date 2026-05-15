@@ -543,7 +543,6 @@
 
             /* TikTok-style mobile feed ============================ */
             .tiktok-feed { display: none; }
-            .tiktok-mute { display: none; }
 
             @media (max-width: 768px) {
                 .ai-hero,
@@ -708,28 +707,6 @@
                     width: 0%;
                 }
 
-                .tiktok-mute {
-                    display: inline-flex;
-                    position: fixed;
-                    top: 4rem;
-                    left: 4rem;
-                    z-index: 1100;
-                    width: 7rem;
-                    height: 7rem;
-                    border-radius: 50%;
-                    border: 1px solid rgba(255,255,255,.3);
-                    background: rgba(0,0,0,.55);
-                    color: #fff;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 1.8rem;
-                    backdrop-filter: blur(10px);
-                    -webkit-backdrop-filter: blur(10px);
-                    cursor: pointer;
-                    padding: 0;
-                }
-
-
                 .tiktok-hint {
                     position: fixed;
                     bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
@@ -763,13 +740,6 @@
             @media (max-width: 600px) {
                 .header__logo-box { top: 2rem; }
                 .header__logo { height: 5rem; }
-                .tiktok-mute {
-                    top: 2rem;
-                    left: 1rem;
-                    width: 5rem;
-                    height: 5rem;
-                    font-size: 1.3rem;
-                }
             }
         </style>
     </head>
@@ -1149,31 +1119,19 @@
 
                 document.body.appendChild(feed);
 
-                // Mute toggle (videos start muted to satisfy autoplay policy)
-                const muteBtn = document.createElement('button');
-                muteBtn.type = 'button';
-                muteBtn.className = 'tiktok-mute';
-                muteBtn.setAttribute('aria-label', 'Toggle sound');
-                muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-                document.body.appendChild(muteBtn);
-
                 // Try to autoplay with audio. Browsers commonly block this without a
                 // prior user gesture; in that case we silently fall back to muted and
-                // unmute on the user's first interaction with the page.
+                // unmute on the user's first interaction with the page (scroll or tap).
                 let isMuted = false;
                 let activeItem = null;
 
                 function setMuted(state) {
                     isMuted = state;
-                    document.body.classList.toggle('tiktok-muted', state);
                     feed.querySelectorAll('video').forEach(v => {
                         v.muted = state;
                         if (state) v.setAttribute('muted', '');
                         else v.removeAttribute('muted');
                     });
-                    muteBtn.innerHTML = state
-                        ? '<i class="fas fa-volume-mute"></i>'
-                        : '<i class="fas fa-volume-up"></i>';
                     // iOS Safari often doesn't reattach the audio track when toggling
                     // muted on a playing element — pause+play forces it.
                     if (!state && activeItem) {
@@ -1193,14 +1151,12 @@
                     }
                 }
 
-                muteBtn.addEventListener('click', e => {
-                    e.stopPropagation();
-                    setMuted(!isMuted);
-                });
-
-                // If unmuted autoplay was blocked, unmute on the user's very first
-                // gesture anywhere on the page — no pill, no extra UI.
+                // First user gesture (including the touchstart that begins a scroll)
+                // unmutes if the browser blocked unmuted autoplay on load.
+                let firstGestureAt = 0;
                 const onFirstGesture = () => {
+                    if (firstGestureAt) return;
+                    firstGestureAt = Date.now();
                     if (isMuted) setMuted(false);
                 };
                 ['pointerdown', 'touchstart', 'keydown'].forEach(evt => {
@@ -1259,25 +1215,16 @@
                 }, { root: feed, threshold: [0, 0.6, 0.95] });
                 items.forEach(it => playIO.observe(it));
 
-                // Tap behavior: first tap on a muted video unmutes (TikTok/Reels-style),
-                // subsequent taps toggle play/pause.
-                feed.addEventListener('click', e => {
-                    if (e.target.closest('.tiktok-mute')) return;
-                    const item = e.target.closest('.tiktok-item');
-                    if (!item) return;
-                    const v = item.querySelector('video');
+                // Tap anywhere on the feed toggles mute/unmute for the active video.
+                // The 600ms grace window prevents the click that immediately follows
+                // the very first touchstart/pointerdown (which already unmuted) from
+                // re-muting on the same gesture.
+                feed.addEventListener('click', () => {
+                    if (firstGestureAt && Date.now() - firstGestureAt < 600) return;
+                    if (!activeItem) return;
+                    const v = activeItem.querySelector('video');
                     if (!v) return;
-                    if (isMuted) {
-                        setMuted(false);
-                        return;
-                    }
-                    if (v.paused) {
-                        item.classList.remove('is-paused');
-                        v.play().catch(() => {});
-                    } else {
-                        v.pause();
-                        item.classList.add('is-paused');
-                    }
+                    setMuted(!v.muted);
                 });
 
                 // Progress bars

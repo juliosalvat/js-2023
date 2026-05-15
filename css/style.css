@@ -958,6 +958,7 @@ top:200px; }
   z-index: 1500;
   opacity: 0;
   width: 0;
+  pointer-events: none;
   transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
 
 .navigation__list {
@@ -997,7 +998,8 @@ top:200px; }
 
 .navigation__checkbox:checked ~ .navigation__nav {
   opacity: 1;
-  width: 100%; }
+  width: 100%;
+  pointer-events: auto; }
 
 .navigation__icon {
   position: relative;
