@@ -540,6 +540,237 @@
                 .video-card__media,
                 .video-card__play { transition: none; }
             }
+
+            /* TikTok-style mobile feed ============================ */
+            .tiktok-feed { display: none; }
+            .tiktok-mute { display: none; }
+
+            @media (max-width: 768px) {
+                .ai-hero,
+                .gallery-section,
+                .footer { display: none !important; }
+
+                body {
+                    background: #000;
+                    overflow: hidden;
+                    margin: 0;
+                }
+
+                /* Logo: pinned, centered between the volume and nav buttons */
+                .header__logo-box {
+                    display: block;
+                    position: fixed;
+                    top: 4rem;
+                    left: 50%;
+                    right: auto;
+                    transform: translateX(-50%);
+                    margin: 0;
+                    z-index: 1100;
+                    pointer-events: auto;
+                }
+                .header__logo {
+                    height: 7rem;
+                    margin: 0;
+                    display: block;
+                }
+
+                .tiktok-feed {
+                    display: block;
+                    position: fixed;
+                    inset: 0;
+                    overflow-y: auto;
+                    scroll-snap-type: y mandatory;
+                    -webkit-overflow-scrolling: touch;
+                    overscroll-behavior-y: contain;
+                    background: #000;
+                    z-index: 1;
+                }
+
+                .tiktok-item {
+                    position: relative;
+                    width: 100vw;
+                    height: 100vh;
+                    height: 100dvh;
+                    scroll-snap-align: start;
+                    scroll-snap-stop: always;
+                    background: #000;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    overflow: hidden;
+                }
+
+                .tiktok-item__video {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    background: #000;
+                    display: block;
+                }
+
+                .tiktok-item__overlay {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    padding: 5rem 1.4rem calc(2rem + env(safe-area-inset-bottom, 0px));
+                    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.85) 100%);
+                    color: #fff;
+                    pointer-events: none;
+                }
+
+                .tiktok-item__meta {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: .5rem;
+                    font-size: .75rem;
+                    font-weight: 700;
+                    letter-spacing: .18rem;
+                    text-transform: uppercase;
+                    color: var(--js-accent);
+                    margin-bottom: .4rem;
+                }
+                .tiktok-item__meta::before {
+                    content: "";
+                    width: 22px;
+                    height: 2px;
+                    background: var(--js-accent);
+                }
+
+                .tiktok-item__title {
+                    font-size: 1.5rem;
+                    font-weight: 800;
+                    margin: 0;
+                    text-transform: capitalize;
+                    text-shadow: 0 2px 8px rgba(0,0,0,.6);
+                    letter-spacing: .02rem;
+                }
+
+                .tiktok-item__badge {
+                    position: absolute;
+                    top: calc(1rem + env(safe-area-inset-top, 0px));
+                    left: 1rem;
+                    background: rgba(0,0,0,.55);
+                    color: #fff;
+                    font-size: .65rem;
+                    letter-spacing: .12rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    padding: .3rem .65rem;
+                    border-radius: 999px;
+                    backdrop-filter: blur(6px);
+                    -webkit-backdrop-filter: blur(6px);
+                    display: inline-flex;
+                    align-items: center;
+                    gap: .35rem;
+                    z-index: 3;
+                }
+                .tiktok-item__badge i { color: var(--js-accent); }
+
+                .tiktok-item__playicon {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(.8);
+                    width: 5rem;
+                    height: 5rem;
+                    border-radius: 50%;
+                    background: rgba(0,0,0,.55);
+                    color: #fff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.8rem;
+                    padding-left: 6px;
+                    opacity: 0;
+                    transition: opacity .25s ease, transform .25s ease;
+                    pointer-events: none;
+                    backdrop-filter: blur(6px);
+                    -webkit-backdrop-filter: blur(6px);
+                }
+                .tiktok-item.is-paused .tiktok-item__playicon {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) scale(1);
+                }
+
+                .tiktok-progress {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    height: 3px;
+                    background: rgba(255,255,255,.18);
+                    z-index: 2;
+                }
+                .tiktok-progress__bar {
+                    height: 100%;
+                    background: var(--js-accent);
+                    width: 0%;
+                }
+
+                .tiktok-mute {
+                    display: inline-flex;
+                    position: fixed;
+                    top: 4rem;
+                    left: 4rem;
+                    z-index: 1100;
+                    width: 7rem;
+                    height: 7rem;
+                    border-radius: 50%;
+                    border: 1px solid rgba(255,255,255,.3);
+                    background: rgba(0,0,0,.55);
+                    color: #fff;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.8rem;
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+                    cursor: pointer;
+                    padding: 0;
+                }
+
+
+                .tiktok-hint {
+                    position: fixed;
+                    bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+                    left: 50%;
+                    transform: translateX(-50%);
+                    z-index: 1100;
+                    color: rgba(255,255,255,.85);
+                    font-size: .8rem;
+                    letter-spacing: .2rem;
+                    text-transform: uppercase;
+                    background: rgba(0,0,0,.4);
+                    border: 1px solid rgba(255,255,255,.15);
+                    padding: .55rem 1rem;
+                    border-radius: 999px;
+                    backdrop-filter: blur(8px);
+                    -webkit-backdrop-filter: blur(8px);
+                    pointer-events: none;
+                    animation: tiktokHint 3s ease forwards;
+                }
+                @keyframes tiktokHint {
+                    0%, 60% { opacity: 1; }
+                    100% { opacity: 0; transform: translate(-50%, 12px); }
+                }
+
+                @media (prefers-reduced-motion: reduce) {
+                    .tiktok-hint { animation: none; }
+                }
+            }
+
+            /* Match the page's existing nav-button override at the ≤600px breakpoint */
+            @media (max-width: 600px) {
+                .header__logo-box { top: 2rem; }
+                .header__logo { height: 5rem; }
+                .tiktok-mute {
+                    top: 2rem;
+                    left: 1rem;
+                    width: 5rem;
+                    height: 5rem;
+                    font-size: 1.3rem;
+                }
+            }
         </style>
     </head>
     <body>
@@ -722,6 +953,13 @@
                     .join(' ');
             }
 
+            const isMobileFeed = window.matchMedia('(max-width: 768px)').matches;
+
+            if (isMobileFeed) {
+                initTikTokFeed();
+                return;
+            }
+
             const grid = document.getElementById('video-grid');
             const emptyState = document.getElementById('gallery-empty');
             const searchInput = document.getElementById('video-search');
@@ -876,6 +1114,192 @@
                     searchInput.focus();
                 }
             });
+
+            // ====== Mobile TikTok-style feed ======
+            function initTikTokFeed() {
+                const feed = document.createElement('div');
+                feed.className = 'tiktok-feed';
+                feed.id = 'tiktok-feed';
+
+                VIDEOS.forEach((filename, idx) => {
+                    const title = prettyTitle(filename);
+                    const src = VIDEO_BASE + encodeURIComponent(filename);
+                    const item = document.createElement('div');
+                    item.className = 'tiktok-item';
+                    item.dataset.idx = idx;
+                    item.innerHTML = `
+                        <video class="tiktok-item__video"
+                               src="${src}"
+                               preload="none"
+                               loop
+                               playsinline
+                               webkit-playsinline
+                               disablePictureInPicture
+                               disableRemotePlayback></video>
+                        <span class="tiktok-item__badge"><i class="fas fa-robot"></i> AI</span>
+                        <span class="tiktok-item__playicon" aria-hidden="true"><i class="fas fa-play"></i></span>
+                        <div class="tiktok-progress"><div class="tiktok-progress__bar"></div></div>
+                        <div class="tiktok-item__overlay">
+                            <div class="tiktok-item__meta">Animation ${String(idx + 1).padStart(2, '0')}</div>
+                            <h3 class="tiktok-item__title">${title}</h3>
+                        </div>
+                    `;
+                    feed.appendChild(item);
+                });
+
+                document.body.appendChild(feed);
+
+                // Mute toggle (videos start muted to satisfy autoplay policy)
+                const muteBtn = document.createElement('button');
+                muteBtn.type = 'button';
+                muteBtn.className = 'tiktok-mute';
+                muteBtn.setAttribute('aria-label', 'Toggle sound');
+                muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                document.body.appendChild(muteBtn);
+
+                // Try to autoplay with audio. Browsers commonly block this without a
+                // prior user gesture; in that case we silently fall back to muted and
+                // unmute on the user's first interaction with the page.
+                let isMuted = false;
+                let activeItem = null;
+
+                function setMuted(state) {
+                    isMuted = state;
+                    document.body.classList.toggle('tiktok-muted', state);
+                    feed.querySelectorAll('video').forEach(v => {
+                        v.muted = state;
+                        if (state) v.setAttribute('muted', '');
+                        else v.removeAttribute('muted');
+                    });
+                    muteBtn.innerHTML = state
+                        ? '<i class="fas fa-volume-mute"></i>'
+                        : '<i class="fas fa-volume-up"></i>';
+                    // iOS Safari often doesn't reattach the audio track when toggling
+                    // muted on a playing element — pause+play forces it.
+                    if (!state && activeItem) {
+                        const v = activeItem.querySelector('video');
+                        if (v) {
+                            const t = v.currentTime;
+                            v.pause();
+                            const p = v.play();
+                            if (p && typeof p.then === 'function') {
+                                p.then(() => {
+                                    if (Math.abs(v.currentTime - t) > 0.4) {
+                                        try { v.currentTime = t; } catch (_) {}
+                                    }
+                                }).catch(() => {});
+                            }
+                        }
+                    }
+                }
+
+                muteBtn.addEventListener('click', e => {
+                    e.stopPropagation();
+                    setMuted(!isMuted);
+                });
+
+                // If unmuted autoplay was blocked, unmute on the user's very first
+                // gesture anywhere on the page — no pill, no extra UI.
+                const onFirstGesture = () => {
+                    if (isMuted) setMuted(false);
+                };
+                ['pointerdown', 'touchstart', 'keydown'].forEach(evt => {
+                    document.addEventListener(evt, onFirstGesture, { once: true, passive: true });
+                });
+
+                // Brief swipe hint
+                const hint = document.createElement('div');
+                hint.className = 'tiktok-hint';
+                hint.textContent = 'Swipe up for more';
+                document.body.appendChild(hint);
+                setTimeout(() => hint.remove(), 3500);
+
+                const items = Array.from(feed.querySelectorAll('.tiktok-item'));
+
+                // Preload nearby videos to keep scrolling smooth
+                const preloadIO = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const v = entry.target.querySelector('video');
+                            if (v && v.preload !== 'auto') v.preload = 'auto';
+                        }
+                    });
+                }, { root: feed, rootMargin: '150% 0px 150% 0px' });
+                items.forEach(it => preloadIO.observe(it));
+
+                // Autoplay the in-view video, pause the rest
+                const playIO = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        const item = entry.target;
+                        const v = item.querySelector('video');
+                        if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+                            activeItem = item;
+                            v.muted = isMuted;
+                            item.classList.remove('is-paused');
+                            const p = v.play();
+                            if (p && typeof p.catch === 'function') {
+                                p.catch(() => {
+                                    // Browser blocked unmuted autoplay — fall back to
+                                    // muted globally so the "Tap to unmute" pill shows
+                                    // and subsequent videos don't keep retrying audio.
+                                    if (!isMuted) setMuted(true);
+                                    v.play().catch(() => {});
+                                });
+                            }
+                        } else {
+                            v.pause();
+                            item.classList.remove('is-paused');
+                            if (entry.intersectionRatio === 0) {
+                                try { v.currentTime = 0; } catch (_) {}
+                                const bar = item.querySelector('.tiktok-progress__bar');
+                                if (bar) bar.style.width = '0%';
+                            }
+                        }
+                    });
+                }, { root: feed, threshold: [0, 0.6, 0.95] });
+                items.forEach(it => playIO.observe(it));
+
+                // Tap behavior: first tap on a muted video unmutes (TikTok/Reels-style),
+                // subsequent taps toggle play/pause.
+                feed.addEventListener('click', e => {
+                    if (e.target.closest('.tiktok-mute')) return;
+                    const item = e.target.closest('.tiktok-item');
+                    if (!item) return;
+                    const v = item.querySelector('video');
+                    if (!v) return;
+                    if (isMuted) {
+                        setMuted(false);
+                        return;
+                    }
+                    if (v.paused) {
+                        item.classList.remove('is-paused');
+                        v.play().catch(() => {});
+                    } else {
+                        v.pause();
+                        item.classList.add('is-paused');
+                    }
+                });
+
+                // Progress bars
+                items.forEach(item => {
+                    const v = item.querySelector('video');
+                    const bar = item.querySelector('.tiktok-progress__bar');
+                    v.addEventListener('timeupdate', () => {
+                        if (v.duration) {
+                            bar.style.width = (v.currentTime / v.duration * 100) + '%';
+                        }
+                    });
+                });
+
+                // Pause active video when tab hidden, resume when visible
+                document.addEventListener('visibilitychange', () => {
+                    if (!activeItem) return;
+                    const v = activeItem.querySelector('video');
+                    if (!v) return;
+                    if (document.hidden) v.pause();
+                    else v.play().catch(() => {});
+                });
+            }
         })();
         </script>
     </body>
