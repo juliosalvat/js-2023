@@ -886,6 +886,182 @@
                 body.ai-page .section-about { padding: 6rem 1.5rem 8rem; }
             }
 
+            /* ============================================================
+             * GALLERY (ai-gallery) — themed character grid/rail
+             * ============================================================ */
+            body.ai-page .ai-gallery {
+                background-color: rgba(10, 13, 20, .92);
+                padding: 10rem 5rem 12rem;
+                position: relative;
+                color: var(--ai-text);
+                scroll-margin-top: 2rem;
+            }
+            body.ai-page .ai-gallery::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-image:
+                    radial-gradient(circle at 80% 30%, rgba(0, 178, 255, .07), transparent 40%),
+                    radial-gradient(circle at 20% 70%, rgba(0, 178, 255, .05), transparent 45%);
+                pointer-events: none;
+                z-index: 0;
+            }
+            body.ai-page .ai-gallery > * { position: relative; z-index: 1; }
+
+            body.ai-page .ai-gallery .ai-section-header {
+                max-width: 1400px;
+                margin: 0 auto 4rem;
+            }
+            body.ai-page .ai-gallery .heading-secondary {
+                color: #fff;
+                font-size: clamp(2rem, 3vw, 2.8rem);
+                font-weight: 900;
+                letter-spacing: -.01em;
+                text-transform: none;
+                margin: 0;
+                display: block;
+            }
+            body.ai-page .ai-gallery .heading-secondary .accent { color: var(--js-accent); }
+
+            .ai-gallery__rail-wrap {
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+            .ai-gallery__hint {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1rem;
+                font-size: 1.2rem;
+                font-weight: 700;
+                letter-spacing: .25rem;
+                text-transform: uppercase;
+                color: var(--ai-dim);
+                margin: 0 .25rem 1.4rem;
+            }
+            .ai-gallery__hint i {
+                color: var(--js-accent);
+                margin: 0 .4rem;
+                font-size: .8rem;
+            }
+            .ai-gallery__rail {
+                display: grid;
+                grid-auto-flow: column;
+                grid-auto-columns: minmax(220px, 1fr);
+                gap: 1.6rem;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                padding: .5rem .25rem 1.5rem;
+                scrollbar-width: thin;
+                scrollbar-color: var(--js-accent) transparent;
+            }
+            .ai-gallery__rail::-webkit-scrollbar { height: 6px; }
+            .ai-gallery__rail::-webkit-scrollbar-track { background: transparent; }
+            .ai-gallery__rail::-webkit-scrollbar-thumb {
+                background: rgba(0, 178, 255, .4);
+                border-radius: 99px;
+            }
+
+            .gallery-card {
+                position: relative;
+                aspect-ratio: 9 / 14;
+                border-radius: var(--ai-radius);
+                overflow: hidden;
+                background: #376c8d;
+                cursor: pointer;
+                border: none;
+                padding: 0;
+                scroll-snap-align: start;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, .4);
+                transition: transform .35s var(--ai-ease), box-shadow .35s var(--ai-ease);
+                display: block;
+                width: 100%;
+            }
+            .gallery-card:hover,
+            .gallery-card:focus-visible {
+                transform: translateY(-6px);
+                box-shadow: 0 18px 40px rgba(0, 0, 0, .55), 0 0 0 1px var(--js-accent);
+                outline: none;
+            }
+            .gallery-card__photo {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                background: #376c8d;
+                transition: transform .8s var(--ai-ease), filter .4s ease;
+            }
+            .gallery-card:hover .gallery-card__photo {
+                transform: scale(1.06);
+                filter: brightness(1.05);
+            }
+            .gallery-card__overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, .85) 100%);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 1rem 1.1rem;
+                color: #fff;
+                pointer-events: none;
+            }
+            .gallery-card__label {
+                font-size: 1rem;
+                font-weight: 700;
+                letter-spacing: .25rem;
+                text-transform: uppercase;
+                color: var(--js-accent);
+                margin: 0 0 .25rem;
+            }
+            .gallery-card__title {
+                font-size: 1.3rem;
+                font-weight: 700;
+                margin: 0;
+                color: #fff;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, .6);
+            }
+            .gallery-card__expand {
+                position: absolute;
+                top: .8rem;
+                right: .8rem;
+                width: 2.2rem;
+                height: 2.2rem;
+                border-radius: 50%;
+                background: rgba(0, 0, 0, .55);
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
+                color: #fff;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: .85rem;
+                z-index: 2;
+                pointer-events: none;
+            }
+            .gallery-card:hover .gallery-card__expand {
+                background: var(--js-accent);
+                color: #001724;
+            }
+
+            /* Fullscreen image modal override (matches the dark theme) */
+            body.ai-page .thumb-modal {
+                background-color: rgba(0, 0, 0, .92);
+            }
+            body.ai-page .thumb-modal__close {
+                color: #fff;
+            }
+
+            @media (max-width: 992px) {
+                body.ai-page .ai-gallery { padding: 8rem 2.5rem 10rem; }
+            }
+            @media (max-width: 768px) {
+                body.ai-page .ai-gallery { padding: 6rem 1.5rem 8rem; }
+                .ai-gallery__rail { grid-auto-columns: minmax(180px, 1fr); }
+            }
+
             /* Responsive overrides for the new layout */
             @media (max-width: 1200px) {
                 .ai-hero { padding: 10rem 3rem 6rem; gap: 2.5rem; }
@@ -991,7 +1167,7 @@
                 <p class="ai-hero__desc">
                     Unique characters that tell stories through visual design and expression — concept to creation, color and form.
                 </p>
-                <a href="#about" class="ai-hero__cta">
+                <a href="#gallery" class="ai-hero__cta">
                     View Gallery <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
@@ -1097,7 +1273,30 @@
                     </div>
                 </div>
             </section>
+
+            <!-- GALLERY ========================================== -->
+            <section class="ai-gallery" id="gallery">
+                <div class="ai-section-header">
+                    <span class="ai-eyebrow">The Collection</span>
+                    <h2 class="heading-secondary">Character <span class="accent">Gallery.</span></h2>
+                </div>
+                <div class="ai-gallery__rail-wrap">
+                    <div class="ai-gallery__hint">
+                        <span><i class="fas fa-circle"></i> Nura Series</span>
+                        <span>Scroll <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                    <div class="ai-gallery__rail" id="character-gallery">
+                        <!-- Cards injected (randomized) via JS -->
+                    </div>
+                </div>
+            </section>
         </main>
+
+        <!-- Fullscreen image modal -->
+        <div class="thumb-modal" id="thumb-modal" aria-hidden="true" role="dialog">
+            <button type="button" class="thumb-modal__close" aria-label="Close">&times;</button>
+            <img class="thumb-modal__image" src="" alt="">
+        </div>
 
         <footer class="footer">
             <div class="footer__logo-box">
@@ -1599,6 +1798,78 @@
                     basePath: IMAGE_BASE_PATH
                 });
             }
+
+            // ====== Character Gallery (randomized subset of SLIDES) ======
+            function shuffle(arr) {
+                for (let i = arr.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
+                return arr;
+            }
+
+            function initGallery() {
+                const rail = document.getElementById('character-gallery');
+                const thumbModal = document.getElementById('thumb-modal');
+                if (!rail) return;
+
+                // Randomize the full SLIDES list — show a healthy subset (30) in the rail
+                const SAMPLE_SIZE = Math.min(30, SLIDES.length);
+                const sample = shuffle(SLIDES.slice()).slice(0, SAMPLE_SIZE);
+
+                sample.forEach((filename, idx) => {
+                    const src = IMAGE_BASE_PATH + filename;
+                    const num = String(idx + 1).padStart(2, '0');
+                    const card = document.createElement('button');
+                    card.type = 'button';
+                    card.className = 'gallery-card';
+                    card.dataset.full = src;
+                    card.setAttribute('aria-label', 'Nura ' + num);
+                    card.innerHTML = `
+                        <img class="gallery-card__photo" src="${src}" alt="Nura character ${num}" loading="lazy">
+                        <span class="gallery-card__expand"><i class="fas fa-expand"></i></span>
+                        <span class="gallery-card__overlay">
+                            <span class="gallery-card__label">Nura</span>
+                            <span class="gallery-card__title">Study ${num}</span>
+                        </span>
+                    `;
+                    rail.appendChild(card);
+                });
+
+                if (!thumbModal) return;
+                const modalImage = thumbModal.querySelector('.thumb-modal__image');
+                const modalClose = thumbModal.querySelector('.thumb-modal__close');
+
+                const openModal = (src, alt) => {
+                    modalImage.src = src;
+                    modalImage.alt = alt || '';
+                    thumbModal.classList.add('thumb-modal--open');
+                    thumbModal.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden';
+                };
+                const closeModal = () => {
+                    thumbModal.classList.remove('thumb-modal--open');
+                    thumbModal.setAttribute('aria-hidden', 'true');
+                    modalImage.src = '';
+                    document.body.style.overflow = '';
+                };
+
+                rail.addEventListener('click', e => {
+                    const card = e.target.closest('.gallery-card');
+                    if (!card) return;
+                    openModal(card.dataset.full, card.getAttribute('aria-label'));
+                });
+                modalClose.addEventListener('click', closeModal);
+                thumbModal.addEventListener('click', e => {
+                    if (e.target === thumbModal) closeModal();
+                });
+                document.addEventListener('keydown', e => {
+                    if (e.key === 'Escape' && thumbModal.classList.contains('thumb-modal--open')) {
+                        closeModal();
+                    }
+                });
+            }
+            initGallery();
         })();
         </script>
     </body>
