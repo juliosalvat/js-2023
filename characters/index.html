@@ -619,7 +619,7 @@
                 font-weight: 700;
                 letter-spacing: .35rem;
                 text-transform: uppercase;
-                color: var(--ai-muted);
+                color: #fff;
                 margin-bottom: 1.4rem;
             }
             .ai-eyebrow::before {
@@ -668,7 +668,7 @@
             .ai-hero__desc {
                 font-size: 1rem;
                 line-height: 1.7;
-                color: var(--ai-muted);
+                color: #fff;
                 margin: 0 0 2.4rem;
                 max-width: 400px;
             }
@@ -813,10 +813,77 @@
             .ai-feature-cta i { color: var(--js-accent); font-size: .85rem; }
             .ai-feature-cta:hover { gap: 1rem; color: var(--js-accent); }
 
-            /* Section-about light section needs to feel intentional after the dark hero */
+            /* ============================================================
+             * CHARACTER DESIGN (section-about) — dark themed override
+             * ============================================================ */
+            html { scroll-behavior: smooth; }
+
             body.ai-page .section-about {
-                background-color: #f7f7f7;
-                padding-top: 7rem;
+                background-color: rgba(10, 13, 20, .92);
+                padding: 10rem 5rem 12rem;
+                position: relative;
+                color: var(--ai-text);
+                margin-top: 0;
+                scroll-margin-top: 2rem;
+            }
+            body.ai-page .section-about::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-image:
+                    radial-gradient(circle at 20% 30%, rgba(0, 178, 255, .07), transparent 40%),
+                    radial-gradient(circle at 80% 70%, rgba(0, 178, 255, .05), transparent 45%);
+                pointer-events: none;
+                z-index: 0;
+            }
+            body.ai-page .section-about > * { position: relative; z-index: 1; }
+
+            body.ai-page .section-about .ai-section-header {
+                max-width: 1400px;
+                margin: 0 auto 4rem;
+            }
+            body.ai-page .section-about .heading-secondary {
+                color: #fff;
+                font-size: clamp(2rem, 3vw, 2.8rem);
+                font-weight: 900;
+                letter-spacing: -.01em;
+                text-transform: none;
+                margin: 0;
+                display: block;
+            }
+            body.ai-page .section-about .heading-secondary .accent { color: var(--js-accent); }
+
+            body.ai-page .section-about .heading-tertiary {
+                color: var(--js-accent);
+                font-size: 1.4rem;
+                font-weight: 700;
+                letter-spacing: .25rem;
+                text-transform: uppercase;
+                margin: 1.5rem 0 1.2rem;
+            }
+            body.ai-page .section-about .paragraph,
+            body.ai-page .section-about p {
+                color: var(--ai-muted);
+                font-size: 1.5rem;
+                line-height: 1.7;
+            }
+            body.ai-page .section-about .paragraph:not(:last-child),
+            body.ai-page .section-about p:not(:last-child) {
+                margin-bottom: 2rem;
+            }
+            body.ai-page .section-about .col-1-of-2 {
+                padding-right: 2rem;
+            }
+            body.ai-page .section-about .col-1-of-2:last-child {
+                padding-right: 0;
+            }
+
+            @media (max-width: 992px) {
+                body.ai-page .section-about { padding: 8rem 2.5rem 10rem; }
+                body.ai-page .section-about .col-1-of-2 { padding-right: 0; }
+            }
+            @media (max-width: 768px) {
+                body.ai-page .section-about { padding: 6rem 1.5rem 8rem; }
             }
 
             /* Responsive overrides for the new layout */
@@ -833,7 +900,7 @@
                     padding: 9rem 2.5rem 6rem;
                 }
                 .ai-hero__right { margin-left: 0; max-width: 100%; }
-                .ai-hero__left { max-width: 100%; }
+                .ai-hero__left { max-width: 100%; margin-top: 20px;}
                 .ai-hero__center { margin: 1rem auto; }
                 .ai-hero__center .slideshow-nav--prev { left: -1.5rem; }
                 .ai-hero__center .slideshow-nav--next { right: -1.5rem; }
@@ -844,13 +911,44 @@
             @media (max-width: 768px) {
                 .ai-hero { padding: 8rem 1.5rem 6rem; }
                 .ai-connect { display: none; }
-                body.ai-page .header__logo { height: 3.5rem; }
-                body.ai-page .header__logo-box { top: 1.5rem; left: 1.5rem; }
+                /* Match the navigation__button (7rem × 7rem at top:4rem right:4rem) */
+                body.ai-page .header__logo { height: 7rem; }
+                body.ai-page .header__logo-box { top: 4rem; left: 4rem; }
                 .ai-hero__center { max-width: 280px; }
                 .ai-hero__center .slideshow-nav { width: 2.2rem; height: 2.2rem; font-size: .85rem; }
                 .ai-hero__center .slideshow-nav--prev { left: -1rem; }
                 .ai-hero__center .slideshow-nav--next { right: -1rem; }
+
+                /* Center the View Gallery CTA only (leave the title/desc as they are) */
+                .ai-hero__left .ai-hero__cta {
+                    display: flex;
+                    width: fit-content;
+                    margin: 0 auto;
+                }
             }
+            @media (max-width: 600px) {
+                /* Mirror the navigation__button position at the phone breakpoint */
+                body.ai-page .header__logo-box { top: 3rem; left: 3rem; }
+            }
+
+            /* ============================================================
+             * HERO TYPOGRAPHY BUMP
+             * css/style.css sets html { font-size: 62.5% } so 1rem = 10px.
+             * Originals were sized for a 16px base — bump them up.
+             * ============================================================ */
+            .ai-eyebrow { font-size: 1.3rem; }
+            .ai-hero__desc { font-size: 1.7rem; line-height: 1.7; max-width: 420px; }
+            .ai-hero__cta { font-size: 1.3rem; padding: 1.4rem 2.4rem; }
+            .ai-hero__cta i { font-size: 1.3rem; }
+            .ai-connect { font-size: 1.4rem; }
+            .ai-feature-subtitle { font-size: 1.6rem; }
+            .ai-feature-desc { font-size: 1.5rem; line-height: 1.7; }
+            .ai-feature-meta { font-size: 1.4rem; }
+            .ai-feature-meta__label { font-size: 1.1rem; }
+            .ai-feature-meta__value { font-size: 1.4rem; }
+            .ai-feature-cta { font-size: 1.3rem; }
+            .ai-feature-cta i { font-size: 1.3rem; }
+            .ai-player__badge { font-size: 1.05rem; padding: .55rem 1rem; }
         </style>
     </head>
     <body class="ai-page">
@@ -968,13 +1066,10 @@
         </section>
         
         <main>
-            <section class="section-about">
-               
-                <div class="u-center-text u-margin-bottom-big">
-                    
-                    <h2 class="heading-secondary">
-                        Character Design
-                    </h2>
+            <section class="section-about" id="about">
+                <div class="ai-section-header">
+                    <span class="ai-eyebrow">The Process</span>
+                    <h2 class="heading-secondary">Character <span class="accent">Design.</span></h2>
                 </div>
 
                 <div class="row">
