@@ -602,7 +602,8 @@
                 .tiktok-item__video {
                     width: 100%;
                     height: 100%;
-                    object-fit: contain;
+                    object-fit: cover;
+                    object-position: center center;
                     background: #000;
                     display: block;
                 }
@@ -871,8 +872,8 @@
             // ====== Video manifest ======
             const VIDEO_BASE = '../video/';
             const VIDEOS = [
-                'a_a_sapo.MP4',
                 'a_b_greenTreefrog.mp4',
+                'a_a_sapo.MP4',                
                 'a_babyDragon.mp4',
                 'a_inmate.mp4',
                 'a_RETF2.MP4',
@@ -1129,8 +1130,12 @@
                     isMuted = state;
                     feed.querySelectorAll('video').forEach(v => {
                         v.muted = state;
-                        if (state) v.setAttribute('muted', '');
-                        else v.removeAttribute('muted');
+                        if (state) {
+                            v.setAttribute('muted', '');
+                        } else {
+                            v.removeAttribute('muted');
+                            v.volume = 1.0;
+                        }
                     });
                     // iOS Safari often doesn't reattach the audio track when toggling
                     // muted on a playing element — pause+play forces it.
@@ -1152,16 +1157,20 @@
                 }
 
                 // First user gesture (including the touchstart that begins a scroll)
-                // unmutes if the browser blocked unmuted autoplay on load.
+                // unmutes if the browser blocked unmuted autoplay on load. We also
+                // listen for `scroll` on the feed as a fallback — by the time scroll
+                // fires, the touchstart that triggered it has already set transient
+                // user activation, so play() is allowed.
                 let firstGestureAt = 0;
                 const onFirstGesture = () => {
                     if (firstGestureAt) return;
                     firstGestureAt = Date.now();
                     if (isMuted) setMuted(false);
                 };
-                ['pointerdown', 'touchstart', 'keydown'].forEach(evt => {
+                ['pointerdown', 'touchstart', 'touchend', 'keydown'].forEach(evt => {
                     document.addEventListener(evt, onFirstGesture, { once: true, passive: true });
                 });
+                feed.addEventListener('scroll', onFirstGesture, { passive: true });
 
                 // Brief swipe hint
                 const hint = document.createElement('div');
