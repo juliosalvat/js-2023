@@ -479,6 +479,184 @@
             }
 
             /* ============================================================
+             * 3D FLIP CARD (three.js CSS3DRenderer)
+             * Wraps front + back faces; JS hands these to CSS3DObjects.
+             * ============================================================ */
+            .ai-portrait-3d {
+                position: relative;
+                width: 100%;
+                aspect-ratio: 9 / 16;
+                cursor: pointer;
+                outline: none;
+            }
+            .ai-portrait-3d:focus-visible {
+                box-shadow: 0 0 0 3px var(--js-accent);
+                border-radius: var(--ai-radius-lg);
+            }
+            .ai-portrait-3d .ai-portrait {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                backface-visibility: hidden;
+                -webkit-backface-visibility: hidden;
+                transition: box-shadow .35s var(--ai-ease);
+            }
+            .ai-portrait-3d:hover .ai-portrait {
+                box-shadow:
+                    0 30px 60px rgba(0,0,0,.55),
+                    0 0 0 1px var(--js-accent);
+            }
+            .ai-portrait[hidden] { display: none; }
+            /* Once JS has initialized, the renderer manages display. */
+            .ai-portrait-3d.is-3d .ai-portrait[hidden] {
+                display: block;
+            }
+
+            /* Flip hint (top-right of front face) */
+            .ai-portrait__flip-hint {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                z-index: 3;
+                display: inline-flex;
+                align-items: center;
+                gap: .45rem;
+                background: rgba(0, 178, 255, .15);
+                border: 1px solid rgba(0, 178, 255, .45);
+                color: #fff;
+                font-size: 1rem;
+                letter-spacing: .2rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                padding: .4rem .8rem;
+                border-radius: 999px;
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                pointer-events: none;
+                transition: transform .35s var(--ai-ease), background .25s var(--ai-ease);
+            }
+            .ai-portrait__flip-hint i {
+                color: var(--js-accent);
+                font-size: .85rem;
+                transition: transform .5s var(--ai-ease);
+            }
+            .ai-portrait-3d:hover .ai-portrait__flip-hint {
+                background: rgba(0, 178, 255, .3);
+            }
+            .ai-portrait-3d:hover .ai-portrait__flip-hint i {
+                transform: rotate(180deg);
+            }
+
+            /* Back face */
+            .ai-portrait--back {
+                background: #0a0d14;
+                border-radius: var(--ai-radius-lg);
+                overflow: hidden;
+                box-shadow:
+                    0 30px 60px rgba(0,0,0,.55),
+                    0 0 0 1px var(--ai-border);
+            }
+            .ai-portrait__img--bg {
+                filter: brightness(.45) saturate(1.1);
+            }
+            .ai-portrait__back-overlay {
+                position: absolute;
+                inset: 0;
+                z-index: 2;
+                display: flex;
+                flex-direction: column;
+                padding: 1.2rem;
+                background:
+                    linear-gradient(180deg, rgba(10,13,20,.15) 0%, rgba(10,13,20,.55) 45%, rgba(10,13,20,.92) 100%),
+                    radial-gradient(circle at 80% 20%, rgba(0, 178, 255, .18), transparent 55%);
+            }
+            .ai-portrait__badge--back {
+                position: static;
+                align-self: flex-start;
+            }
+            .ai-portrait__badge--back i {
+                color: var(--js-accent);
+                animation: none;
+            }
+            .ai-portrait__back-card {
+                margin-top: auto;
+                padding: 1.3rem 1.2rem 1.2rem;
+                background: rgba(10,13,20,.7);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid var(--ai-border);
+                border-radius: var(--ai-radius);
+            }
+            .ai-portrait__back-card .ai-portrait__caption-name {
+                font-size: 1.7rem;
+                font-weight: 800;
+                margin: 0 0 .25rem;
+                color: #fff;
+            }
+            .ai-portrait__back-card .ai-portrait__caption-role {
+                font-size: 1.1rem;
+                font-weight: 700;
+                letter-spacing: .2rem;
+                text-transform: uppercase;
+                color: var(--js-accent);
+                margin: 0 0 1.2rem;
+            }
+            .ai-portrait__meta {
+                margin: 0;
+                padding: 0;
+                font-size: 1.2rem;
+            }
+            .ai-portrait__meta-row {
+                display: grid;
+                grid-template-columns: 11rem 1fr;
+                gap: 1rem;
+                align-items: center;
+                padding: .65rem 0;
+                border-bottom: 1px solid var(--ai-border);
+            }
+            .ai-portrait__meta-row:last-of-type {
+                border-bottom: none;
+            }
+            .ai-portrait__meta dt {
+                display: inline-flex;
+                align-items: center;
+                gap: .55rem;
+                margin: 0;
+                color: var(--ai-dim);
+                font-weight: 700;
+                font-size: 1rem;
+                letter-spacing: .18rem;
+                text-transform: uppercase;
+            }
+            .ai-portrait__meta dt i {
+                color: var(--js-accent);
+                font-size: 1.1rem;
+                width: 1.3rem;
+                text-align: center;
+            }
+            .ai-portrait__meta dd {
+                margin: 0;
+                color: var(--ai-text);
+                font-weight: 700;
+                font-size: 1.3rem;
+            }
+            .ai-portrait__flip-hint--inline {
+                position: static;
+                margin-top: 1rem;
+                background: transparent;
+                border: none;
+                padding: 0;
+                color: var(--ai-muted);
+                font-size: .9rem;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+            }
+            .ai-portrait__flip-hint--inline i {
+                font-size: .9rem;
+            }
+
+            /* ============================================================
              * HERO TYPOGRAPHY BUMP
              * css/style.css sets html { font-size: 62.5% } so 1rem = 10px.
              * The original .72rem / .92rem / 1rem values were sized for a
@@ -1101,14 +1279,42 @@
                 </ul>
             </div>
 
-            <!-- CENTER: portrait card -->
+            <!-- CENTER: portrait card (3D flip via three.js CSS3DRenderer) -->
             <div class="ai-hero__center">
-                <div class="ai-portrait">
-                    <span class="ai-portrait__badge"><i class="fas fa-circle"></i> Available for Work</span>
-                    <img class="ai-portrait__img" src="img/julio.png" alt="Julio Salvat">
-                    <div class="ai-portrait__caption">
-                        <p class="ai-portrait__caption-name">Julio Salvat</p>
-                        <p class="ai-portrait__caption-role">Engineer · AI Developer · Artist</p>
+                <div class="ai-portrait-3d" role="button" tabindex="0" aria-label="Flip portrait card">
+                    <div class="ai-portrait ai-portrait--front">
+                        <span class="ai-portrait__badge"><i class="fas fa-circle"></i> Available for Work</span>
+                        <span class="ai-portrait__flip-hint"><i class="fas fa-sync-alt"></i> Flip</span>
+                        <img class="ai-portrait__img" src="img/julio.png" alt="Julio Salvat">
+                        <div class="ai-portrait__caption">
+                            <p class="ai-portrait__caption-name">Julio Salvat</p>
+                            <p class="ai-portrait__caption-role">Engineer · AI Developer · Artist</p>
+                        </div>
+                    </div>
+                    <div class="ai-portrait ai-portrait--back" hidden>
+                        <img class="ai-portrait__img ai-portrait__img--bg" src="img/z34.jpg" alt="Julio's Nissan 370Z">
+                        <div class="ai-portrait__back-overlay">
+                            <span class="ai-portrait__badge ai-portrait__badge--back"><i class="fas fa-id-card"></i> Profile</span>
+                            <div class="ai-portrait__back-card">
+                                <p class="ai-portrait__caption-name">Julio Salvat</p>
+                                <p class="ai-portrait__caption-role">Engineer · AI Developer · Artist</p>
+                                <dl class="ai-portrait__meta">
+                                    <div class="ai-portrait__meta-row">
+                                        <dt><i class="fas fa-map-marker-alt"></i> Born</dt>
+                                        <dd>Atlanta, GA</dd>
+                                    </div>
+                                    <div class="ai-portrait__meta-row">
+                                        <dt><i class="fab fa-linux"></i> OS</dt>
+                                        <dd>Linux</dd>
+                                    </div>
+                                    <div class="ai-portrait__meta-row">
+                                        <dt><i class="fas fa-car"></i> Race Car</dt>
+                                        <dd>TT Z34 Nismo</dd>
+                                    </div>
+                                </dl>
+                                <span class="ai-portrait__flip-hint ai-portrait__flip-hint--inline"><i class="fas fa-sync-alt"></i> Flip back</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1540,6 +1746,106 @@
                     document.body.style.overflow = 'hidden';
                 });
             }
+        })();
+        </script>
+
+        <!-- ============================================================
+             3D FLIP PORTRAIT CARD — three.js CSS3DRenderer
+             Renders the existing .ai-portrait--front + .ai-portrait--back
+             as two faces of a 3D card. Flip is driven by hover state.
+             ============================================================ -->
+        <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+        </script>
+        <script type="module">
+        import * as THREE from 'three';
+        import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer.js';
+
+        (function initFlipCard() {
+            const stage = document.querySelector('.ai-portrait-3d');
+            const front = stage && stage.querySelector('.ai-portrait--front');
+            const back  = stage && stage.querySelector('.ai-portrait--back');
+            if (!stage || !front || !back) return;
+
+            // Reveal the back face so it can be picked up by the renderer.
+            back.removeAttribute('hidden');
+            stage.classList.add('is-3d');
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(40, 1, 1, 5000);
+
+            const renderer = new CSS3DRenderer();
+            const dom = renderer.domElement;
+            dom.style.position = 'absolute';
+            dom.style.top = '0';
+            dom.style.left = '0';
+            dom.style.width = '100%';
+            dom.style.height = '100%';
+            // Renderer wrapper should not eat events; the faces themselves stay interactive.
+            dom.style.pointerEvents = 'none';
+            stage.appendChild(dom);
+
+            // Strip the original layout sizing — CSS3DObject moves these into the renderer's tree.
+            [front, back].forEach(face => {
+                face.style.position = 'absolute';
+                face.style.top = '0';
+                face.style.left = '0';
+                face.style.pointerEvents = 'auto';
+            });
+
+            const group = new THREE.Group();
+            const frontObj = new CSS3DObject(front);
+            const backObj  = new CSS3DObject(back);
+            backObj.rotation.y = Math.PI;
+            group.add(frontObj);
+            group.add(backObj);
+            scene.add(group);
+
+            function resize() {
+                const w = stage.clientWidth;
+                const h = stage.clientHeight;
+                if (!w || !h) return;
+                renderer.setSize(w, h);
+                camera.aspect = w / h;
+                const fovRad = (camera.fov * Math.PI) / 180;
+                camera.position.z = (h / 2) / Math.tan(fovRad / 2);
+                camera.updateProjectionMatrix();
+                front.style.width = w + 'px';
+                front.style.height = h + 'px';
+                back.style.width  = w + 'px';
+                back.style.height = h + 'px';
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            // Hover-driven flip with eased interpolation.
+            let target = 0;
+            let current = 0;
+            const flipTo = (angle) => { target = angle; };
+
+            stage.addEventListener('mouseenter', () => flipTo(Math.PI));
+            stage.addEventListener('mouseleave', () => flipTo(0));
+            // Touch / keyboard parity (no hover on mobile).
+            stage.addEventListener('focus',    () => flipTo(Math.PI));
+            stage.addEventListener('blur',     () => flipTo(0));
+            stage.addEventListener('click', () => flipTo(target === 0 ? Math.PI : 0));
+
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const ease = reduce ? 1 : 0.12;
+
+            function tick() {
+                requestAnimationFrame(tick);
+                current += (target - current) * ease;
+                if (Math.abs(target - current) < 0.0005) current = target;
+                group.rotation.y = current;
+                renderer.render(scene, camera);
+            }
+            tick();
         })();
         </script>
     </body>
