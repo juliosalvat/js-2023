@@ -987,7 +987,39 @@
             .ai-gallery__rail-wrap {
                 max-width: 1400px;
                 margin: 0 auto;
+                position: relative;
             }
+            .rail-edge-hint {
+                position: absolute;
+                top: 0;
+                bottom: 1.6rem;
+                width: clamp(56px, 7%, 90px);
+                z-index: 5;
+                display: flex;
+                align-items: center;
+                opacity: 0;
+                transition: opacity .25s ease;
+                pointer-events: none;
+            }
+            .rail-edge-hint--left {
+                left: 0;
+                justify-content: flex-start;
+                padding-left: 1.2rem;
+                background: linear-gradient(90deg, rgba(10, 13, 20, .75), rgba(10, 13, 20, 0));
+            }
+            .rail-edge-hint--right {
+                right: 0;
+                justify-content: flex-end;
+                padding-right: 1.2rem;
+                background: linear-gradient(-90deg, rgba(10, 13, 20, .75), rgba(10, 13, 20, 0));
+            }
+            .rail-edge-hint.is-active { opacity: 1; }
+            .rail-edge-hint i {
+                color: var(--js-accent);
+                font-size: 1.8rem;
+                text-shadow: 0 2px 10px rgba(0, 0, 0, .8);
+            }
+            @media (hover: none) { .rail-edge-hint { display: none; } }
             .ai-gallery__hint {
                 display: flex;
                 align-items: center;
@@ -1025,7 +1057,7 @@
 
             .gallery-card {
                 position: relative;
-                aspect-ratio: 9 / 14;
+                aspect-ratio: 6 / 17;
                 border-radius: var(--ai-radius);
                 overflow: hidden;
                 background: #376c8d;
@@ -1929,9 +1961,86 @@
                         closeModal();
                     }
                 });
+
+                setupRailAutoScroll(rail);
             }
             initGallery();
         })();
+
+        function setupRailAutoScroll(rail) {
+            if (!rail) return;
+            if (window.matchMedia('(hover: none)').matches) return;
+            const wrap = rail.parentElement;
+            if (!wrap) return;
+            if (getComputedStyle(wrap).position === 'static') {
+                wrap.style.position = 'relative';
+            }
+            const EDGE_PX = 90;
+            const SPEED = 7;
+            let raf = null;
+            let dir = 0;
+
+            function makeHint(side) {
+                const el = document.createElement('div');
+                el.className = 'rail-edge-hint rail-edge-hint--' + side;
+                el.setAttribute('aria-hidden', 'true');
+                const icon = document.createElement('i');
+                icon.className = 'fas fa-chevron-' + side;
+                el.appendChild(icon);
+                return el;
+            }
+            const leftHint = makeHint('left');
+            const rightHint = makeHint('right');
+            wrap.appendChild(leftHint);
+            wrap.appendChild(rightHint);
+
+            function step() {
+                if (!dir) { raf = null; return; }
+                rail.scrollLeft += dir * SPEED;
+                const max = rail.scrollWidth - rail.clientWidth;
+                if ((dir > 0 && rail.scrollLeft >= max) || (dir < 0 && rail.scrollLeft <= 0)) {
+                    dir = 0;
+                    raf = null;
+                    syncHints();
+                    return;
+                }
+                raf = requestAnimationFrame(step);
+            }
+            function start(d) {
+                if (dir === d) return;
+                dir = d;
+                rail.style.scrollSnapType = 'none';
+                if (!raf) raf = requestAnimationFrame(step);
+                syncHints();
+            }
+            function stop() {
+                if (dir === 0 && !raf) return;
+                dir = 0;
+                if (raf) cancelAnimationFrame(raf);
+                raf = null;
+                rail.style.scrollSnapType = '';
+                syncHints();
+            }
+            function syncHints() {
+                leftHint.classList.toggle('is-active', dir < 0);
+                rightHint.classList.toggle('is-active', dir > 0);
+            }
+
+            rail.addEventListener('mousemove', e => {
+                const rect = rail.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const max = rail.scrollWidth - rail.clientWidth;
+                if (max <= 0) { stop(); return; }
+                if (x > rect.width - EDGE_PX && rail.scrollLeft < max - 1) {
+                    start(1);
+                } else if (x < EDGE_PX && rail.scrollLeft > 0) {
+                    start(-1);
+                } else {
+                    stop();
+                }
+            });
+            rail.addEventListener('mouseleave', stop);
+        }
         </script>
     </body>
 </html>
