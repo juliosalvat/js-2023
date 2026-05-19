@@ -1139,13 +1139,7 @@
                 color: #001724;
             }
 
-            /* Fullscreen image modal override (matches the dark theme) */
-            body.ai-page .thumb-modal {
-                background-color: rgba(0, 0, 0, .92);
-            }
-            body.ai-page .thumb-modal__close {
-                color: #fff;
-            }
+            /* Fullscreen image modal — white background (shared white panel look) */
 
             @media (max-width: 992px) {
                 body.ai-page .ai-gallery { padding: 8rem 2.5rem 10rem; }
@@ -1388,7 +1382,9 @@
         <!-- Fullscreen image modal -->
         <div class="thumb-modal" id="thumb-modal" aria-hidden="true" role="dialog">
             <button type="button" class="thumb-modal__close" aria-label="Close">&times;</button>
+            <button type="button" class="thumb-modal__nav thumb-modal__nav--prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
             <img class="thumb-modal__image" src="" alt="">
+            <button type="button" class="thumb-modal__nav thumb-modal__nav--next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
         </div>
 
         <footer class="footer">
@@ -1932,10 +1928,20 @@
                 if (!thumbModal) return;
                 const modalImage = thumbModal.querySelector('.thumb-modal__image');
                 const modalClose = thumbModal.querySelector('.thumb-modal__close');
+                const prevBtn = thumbModal.querySelector('.thumb-modal__nav--prev');
+                const nextBtn = thumbModal.querySelector('.thumb-modal__nav--next');
+                let currentIdx = 0;
 
-                const openModal = (src, alt) => {
-                    modalImage.src = src;
-                    modalImage.alt = alt || '';
+                function showAt(idx) {
+                    const len = sample.length;
+                    if (!len) return;
+                    currentIdx = ((idx % len) + len) % len;
+                    const filename = sample[currentIdx];
+                    modalImage.src = IMAGE_BASE_PATH + filename;
+                    modalImage.alt = 'Nura ' + String(currentIdx + 1).padStart(2, '0');
+                }
+                const openModalAt = (idx) => {
+                    showAt(idx);
                     thumbModal.classList.add('thumb-modal--open');
                     thumbModal.setAttribute('aria-hidden', 'false');
                     document.body.style.overflow = 'hidden';
@@ -1950,16 +1956,26 @@
                 rail.addEventListener('click', e => {
                     const card = e.target.closest('.gallery-card');
                     if (!card) return;
-                    openModal(card.dataset.full, card.getAttribute('aria-label'));
+                    const idx = Array.from(rail.children).indexOf(card);
+                    openModalAt(idx >= 0 ? idx : 0);
                 });
                 modalClose.addEventListener('click', closeModal);
                 thumbModal.addEventListener('click', e => {
                     if (e.target === thumbModal) closeModal();
                 });
+                if (prevBtn) prevBtn.addEventListener('click', e => {
+                    e.stopPropagation();
+                    showAt(currentIdx - 1);
+                });
+                if (nextBtn) nextBtn.addEventListener('click', e => {
+                    e.stopPropagation();
+                    showAt(currentIdx + 1);
+                });
                 document.addEventListener('keydown', e => {
-                    if (e.key === 'Escape' && thumbModal.classList.contains('thumb-modal--open')) {
-                        closeModal();
-                    }
+                    if (!thumbModal.classList.contains('thumb-modal--open')) return;
+                    if (e.key === 'Escape') { closeModal(); }
+                    else if (e.key === 'ArrowLeft') { e.preventDefault(); showAt(currentIdx - 1); }
+                    else if (e.key === 'ArrowRight') { e.preventDefault(); showAt(currentIdx + 1); }
                 });
 
                 setupRailAutoScroll(rail);

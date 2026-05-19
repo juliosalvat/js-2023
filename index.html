@@ -1816,7 +1816,9 @@
 
             <div class="thumb-modal" id="thumb-modal" aria-hidden="true" role="dialog">
                 <button type="button" class="thumb-modal__close" aria-label="Close">&times;</button>
+                <button type="button" class="thumb-modal__nav thumb-modal__nav--prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
                 <img class="thumb-modal__image" src="" alt="">
+                <button type="button" class="thumb-modal__nav thumb-modal__nav--next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
             </div>
 
        <footer class="footer">
@@ -1911,17 +1913,45 @@
                 rail.appendChild(card);
             });
 
-            // Wire up clicks to the existing thumb-modal
+            // Wire up clicks + prev/next nav for the thumb-modal
             if (thumbModal) {
                 const modalImage = thumbModal.querySelector('.thumb-modal__image');
+                const prevBtn = thumbModal.querySelector('.thumb-modal__nav--prev');
+                const nextBtn = thumbModal.querySelector('.thumb-modal__nav--next');
+                let currentIdx = 0;
+
+                function showAt(idx) {
+                    const len = shuffled.length;
+                    if (!len) return;
+                    currentIdx = ((idx % len) + len) % len;
+                    const s = shuffled[currentIdx];
+                    modalImage.src = s.src;
+                    modalImage.alt = s.project + ' — ' + s.label;
+                }
+
                 rail.addEventListener('click', e => {
                     const card = e.target.closest('.screen-card');
                     if (!card) return;
-                    modalImage.src = card.dataset.full;
-                    modalImage.alt = card.getAttribute('aria-label') || '';
+                    const idx = Array.from(rail.children).indexOf(card);
+                    showAt(idx >= 0 ? idx : 0);
                     thumbModal.classList.add('thumb-modal--open');
                     thumbModal.setAttribute('aria-hidden', 'false');
                     document.body.style.overflow = 'hidden';
+                });
+
+                if (prevBtn) prevBtn.addEventListener('click', e => {
+                    e.stopPropagation();
+                    showAt(currentIdx - 1);
+                });
+                if (nextBtn) nextBtn.addEventListener('click', e => {
+                    e.stopPropagation();
+                    showAt(currentIdx + 1);
+                });
+
+                document.addEventListener('keydown', e => {
+                    if (!thumbModal.classList.contains('thumb-modal--open')) return;
+                    if (e.key === 'ArrowLeft') { e.preventDefault(); showAt(currentIdx - 1); }
+                    else if (e.key === 'ArrowRight') { e.preventDefault(); showAt(currentIdx + 1); }
                 });
             }
 
