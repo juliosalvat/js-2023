@@ -856,6 +856,27 @@
             .ai-page .section-tours .card__side--front {
                 background-color: var(--ai-card);
             }
+            /* 5-column grid override for this section */
+            .ai-page .section-tours .row {
+                max-width: 130rem;
+            }
+            .ai-page .section-tours .row .col-1-of-5 {
+                width: calc((100% - 4 * 2rem) / 5);
+                float: left;
+            }
+            .ai-page .section-tours .row .col-1-of-5:not(:last-child) {
+                margin-right: 2rem;
+            }
+            @media only screen and (max-width: 56.25em) {
+                .ai-page .section-tours .row .col-1-of-5 {
+                    width: 100% !important;
+                }
+                .ai-page .section-tours .row .col-1-of-5:not(:last-child) {
+                    margin-right: 0;
+                    margin-bottom: 6rem;
+                }
+            }
+
             /* Card back — accent gradients matching the theme */
             .ai-page .section-tours .card__side--back-1 {
                 background-image: linear-gradient(135deg, rgba(0, 178, 255, .9), rgba(5, 29, 52, .95));
@@ -865,6 +886,12 @@
             }
             .ai-page .section-tours .card__side--back-3 {
                 background-image: linear-gradient(135deg, rgba(0, 137, 199, .85), rgba(5, 29, 52, .98));
+            }
+            .ai-page .section-tours .card__side--back-4 {
+                background-image: linear-gradient(135deg, rgba(0, 178, 255, .85), rgba(10, 13, 20, .98));
+            }
+            .ai-page .section-tours .card__side--back-5 {
+                background-image: linear-gradient(135deg, rgba(0, 137, 199, .9), rgba(5, 29, 52, .98));
             }
 
             /* Card picture overlay — unified accent treatment */
@@ -877,12 +904,20 @@
             .ai-page .section-tours .card__picture--3 {
                 background-image: linear-gradient(135deg, rgba(0, 178, 255, .85), rgba(5, 29, 52, .95)), url(../img/nat-3.jpg);
             }
+            .ai-page .section-tours .card__picture--4 {
+                background-image: linear-gradient(135deg, rgba(0, 178, 255, .85), rgba(5, 29, 52, .95)), url(../img/inncol.png);
+            }
+            .ai-page .section-tours .card__picture--5 {
+                background-image: linear-gradient(135deg, rgba(0, 178, 255, .85), rgba(5, 29, 52, .95)), url(../img/agentenginelabs.png);
+            }
 
             /* Card heading span — uniform dark pill */
             .ai-page .section-tours .card__heading-span,
             .ai-page .section-tours .card__heading-span--1,
             .ai-page .section-tours .card__heading-span--2,
-            .ai-page .section-tours .card__heading-span--3 {
+            .ai-page .section-tours .card__heading-span--3,
+            .ai-page .section-tours .card__heading-span--4,
+            .ai-page .section-tours .card__heading-span--5 {
                 background-image: none;
                 background-color: rgba(10, 13, 20, .82);
                 backdrop-filter: blur(6px);
@@ -890,7 +925,7 @@
                 border: 1px solid var(--ai-border);
                 color: #fff;
                 font-weight: 800;
-                font-size: 2.2rem;
+                font-size: 1.7rem;
                 letter-spacing: .04rem;
                 text-transform: none;
             }
@@ -1538,71 +1573,71 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-1-of-3">
-                       <div class="card">
-                           <div class="card__side card__side--front">
-                                <div class="card__picture card__picture--1">
-                                    &nbsp;
-                                </div>
-                                <h4 class="card__heading">
-                                    <span class="card__heading-span card__heading-span--1">Cybersecurity</span>
-                                </h4>
-                                <div class="card__details">
-                                    <ul>
-                                        <li>Cloud Computing
-                                        </li>
-                                        <li>Artificial Intelligence</li>
-                                        <li>Application Security</li>
-                                        <li>Information Security and Governance</li>
-                                        <li>Network Security</li>
-                                    </ul>
-                                </div>
-                           </div>
-                           <div class="card__side card__side--back card__side--back-1">
-                                <div class="card__cta">
-                                    <div class="card__price-box">                                        
-                                        <p class="card__price-only"> HTML / JS / CSS / PHP / MYSQL DB / AWS / LINUX EC2</p>
-                                    </div>
-                                    <a href="https://cfcse.co/" target="_blank" class="btn btn--white">Visit</a>
-                                </div>
-                            </div>
-                       </div>
-                    </div>
-
-
-                    <div class="col-1-of-3">
+                    <div class="col-1-of-5">
                         <div class="card">
                             <div class="card__side card__side--front">
-                                <div class="card__picture card__picture--2">
+                                <div class="card__picture card__picture--4">
                                     &nbsp;
                                 </div>
                                 <h4 class="card__heading">
-                                    <span class="card__heading-span card__heading-span--2">Senior Syndicate</span>
+                                    <span class="card__heading-span card__heading-span--4">Inncol</span>
                                 </h4>
                                 <div class="card__details">
                                     <ul>
-                                        <li>Social Network</li>
-                                        <li>Small Businesses</li>                                        
-                                        <li>Financial Group</li>
-                                        <li>Loan Qualifications</li>
-                                        <li>For-Profit Business</li>
+                                        <li>Ai</li>
+                                        <li>Software</li>
+                                        <li>Marketing</li>
+                                        <li>Lead Gen</li>                                        
+                                        <li>Analytics</li>
                                     </ul>
                                 </div>
 
                             </div>
-                            <div class="card__side card__side--back card__side--back-2">
+                            <div class="card__side card__side--back card__side--back-4">
                                 <div class="card__cta">
                                     <div class="card__price-box">
-                                        <p class="card__price-only"> ReactJS / CSS / MongoDB / AWS / LINUX EC2</p>
+                                        <p class="card__price-only">ReactJS / Node / MongoDB / AWS / LINUX EC2</p>
                                     </div>
-                                    <a href="https://dev.seniorsyndicate.com" target="_blank" class="btn btn--white">Visit</a>
+                                    <a href="https://inncol.com" target="_blank" class="btn btn--white">Visit</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
 
-                    <div class="col-1-of-3">
+                    <div class="col-1-of-5">
+                        <div class="card">
+                            <div class="card__side card__side--front">
+                                <div class="card__picture card__picture--5">
+                                    &nbsp;
+                                </div>
+                                <h4 class="card__heading">
+                                    <span class="card__heading-span card__heading-span--5">Agent Engine Labs</span>
+                                </h4>
+                                <div class="card__details">
+                                    <ul>
+                                        <li>AI Agents</li>                                        
+                                        <li>API Platform</li>
+                                        <li>Custom Tooling</li>
+                                        <li>LLM Integration</li>
+                                        <li>Workflow Automation</li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div class="card__side card__side--back card__side--back-5">
+                                <div class="card__cta">
+                                    <div class="card__price-box">
+                                        <p class="card__price-only">ReactJS / Python / OpenAI / AWS</p>
+                                    </div>
+                                    <a href="https://agentenginelabs.com" target="_blank" class="btn btn--white">Visit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-1-of-5">
                         <div class="card">
                             <div class="card__side card__side--front">
                                 <div class="card__picture card__picture--3">
@@ -1616,8 +1651,9 @@
                                         <li>Resources</li>
                                         <li>Benefits</li>
                                         <li>Services</li>
-                                        <li>Financial Programs</li>
                                         <li>Grants</li>
+                                        <li>Financial Programs</li>
+                                        
                                     </ul>
                                 </div>
 
@@ -1628,6 +1664,69 @@
                                         <p class="card__price-only">HTML / JS / CSS / PHP / MYSQL DB / AWS / LINUX EC2</p>
                                     </div>
                                     <a href="https://ihopeproject.com/" target="_blank" class="btn btn--white">Visit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-1-of-5">
+                       <div class="card">
+                           <div class="card__side card__side--front">
+                                <div class="card__picture card__picture--1">
+                                    &nbsp;
+                                </div>
+                                <h4 class="card__heading">
+                                    <span class="card__heading-span card__heading-span--1">Cybersecurity</span>
+                                </h4>
+                                <div class="card__details">
+                                    <ul>
+                                        <li>Ai</li>
+                                        <li>Employment</li>
+                                        <li>Cloud Computing</li>                                        
+                                        <li>Cyber Security</li>                                        
+                                        <li>Network Security</li>
+                                    </ul>
+                                </div>
+                           </div>
+                           <div class="card__side card__side--back card__side--back-1">
+                                <div class="card__cta">
+                                    <div class="card__price-box">
+                                        <p class="card__price-only"> HTML / JS / CSS / PHP / MYSQL DB / AWS / LINUX EC2</p>
+                                    </div>
+                                    <a href="https://cfcse.co/" target="_blank" class="btn btn--white">Visit</a>
+                                </div>
+                            </div>
+                       </div>
+                    </div>
+
+
+                    <div class="col-1-of-5">
+                        <div class="card">
+                            <div class="card__side card__side--front">
+                                <div class="card__picture card__picture--2">
+                                    &nbsp;
+                                </div>
+                                <h4 class="card__heading">
+                                    <span class="card__heading-span card__heading-span--2">Senior Syndicate</span>
+                                </h4>
+                                <div class="card__details">
+                                    <ul>
+                                        <li>Social Network</li>
+                                        <li>Financial Group</li>
+                                        <li>Small Businesses</li>
+                                        <li>Loan Qualifications</li>
+                                        <li>For-Profit Business</li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div class="card__side card__side--back card__side--back-2">
+                                <div class="card__cta">
+                                    <div class="card__price-box">
+                                        <p class="card__price-only"> ReactJS / CSS / MongoDB / AWS / LINUX EC2</p>
+                                    </div>
+                                    <a href="https://dev.seniorsyndicate.com" target="_blank" class="btn btn--white">Visit</a>
                                 </div>
                             </div>
                         </div>
