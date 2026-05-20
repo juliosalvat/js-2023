@@ -554,11 +554,13 @@
                 border-radius: var(--ai-radius-lg);
                 overflow: hidden;
                 box-shadow:
-                    0 30px 60px rgba(0,0,0,.55),
+                    0 30px 60px rgba(0, 0, 0, 0.039),
                     0 0 0 1px var(--ai-border);
             }
             .ai-portrait__img--bg {
-                filter: brightness(.45) saturate(1.1);
+                /* filter: brightness(.45) saturate(1.1); */
+                transform: scale(1.15) translateY(-22%);
+                transform-origin: center center;
             }
             .ai-portrait__back-overlay {
                 position: absolute;
@@ -567,9 +569,9 @@
                 display: flex;
                 flex-direction: column;
                 padding: 1.2rem;
-                background:
+                /* background:
                     linear-gradient(180deg, rgba(10,13,20,.15) 0%, rgba(10,13,20,.55) 45%, rgba(10,13,20,.92) 100%),
-                    radial-gradient(circle at 80% 20%, rgba(0, 178, 255, .18), transparent 55%);
+                    radial-gradient(circle at 80% 20%, rgba(0, 178, 255, .18), transparent 55%); */
             }
             .ai-portrait__badge--back {
                 position: static;
