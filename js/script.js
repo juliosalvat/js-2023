@@ -1,9 +1,11 @@
 const checkbox = document.getElementById('navi-toggle');
 const link = document.getElementById('myLink');
 
-link.addEventListener('click', function(event) {
-    checkbox.checked = false;
-});
+if (link) {
+    link.addEventListener('click', function(event) {
+        if (checkbox) checkbox.checked = false;
+    });
+}
 
 const thumbModal = document.getElementById('thumb-modal');
 if (thumbModal) {

@@ -458,7 +458,7 @@ body.landing-page {
     .lp-hero__lede { font-size: 1.7rem; }
     .lp-section__title { font-size: 2.6rem; }
     .lp-hero__actions { justify-content: flex-start; }
-    .landing-page .header__logo { height: 6rem; }
+    .landing-page .header__logo { height: 9rem; }
     .landing-page .header__logo-box { top: 4rem; left: 4rem; }
 }
 @media (max-width: 600px) {
