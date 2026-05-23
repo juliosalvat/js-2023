@@ -425,14 +425,22 @@
             const HOLD_MS = 4500;
             const FADE_MS = 1600;
 
+            // Shuffle-bag: shuffle the full list, drain it one-by-one,
+            // then reshuffle (preventing the last drawn from being the new first).
+            let bag = [];
+            function reshuffle() {
+                bag = SLIDES.slice();
+                for (let i = bag.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [bag[i], bag[j]] = [bag[j], bag[i]];
+                }
+                if (currentFile && bag[bag.length - 1] === currentFile && bag.length > 1) {
+                    [bag[bag.length - 1], bag[0]] = [bag[0], bag[bag.length - 1]];
+                }
+            }
             function pick() {
-                let next;
-                let guard = 0;
-                do {
-                    next = SLIDES[Math.floor(Math.random() * SLIDES.length)];
-                    guard++;
-                } while (next === currentFile && guard < 20);
-                return next;
+                if (!bag.length) reshuffle();
+                return bag.pop();
             }
 
             function preload(src) {
