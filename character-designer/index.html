@@ -30,6 +30,79 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/landing.css">
 
+    <style>
+        .lp-hero {
+            min-height: 100vh;
+            padding-top: 10rem;
+            padding-bottom: 6rem;
+            overflow: hidden;
+        }
+        .lp-hero__inner {
+            position: relative;
+            z-index: 2;
+            max-width: none;
+            width: 60%;
+            margin: 0;
+            padding-left: 6rem;
+            box-sizing: border-box;
+        }
+        .lp-hero__chars {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 45%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .lp-hero__char {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            opacity: 0;
+            transition: opacity 1.6s ease-in-out;
+            will-change: opacity;
+        }
+        .lp-hero__char.is-visible { opacity: 1; }
+
+        @media (max-width: 900px) {
+            .lp-hero {
+                min-height: auto;
+                padding-top: 10rem;
+                padding-bottom: 4rem;
+                display: flex;
+                flex-direction: column;
+                gap: 2.5rem;
+            }
+            .lp-hero__inner {
+                width: 100%;
+                padding-left: 0;
+                order: 1;
+                margin-top:30px;
+            }
+            .lp-hero__chars {
+                position: relative;
+                top: auto;
+                bottom: auto;
+                left: 0;
+                right: 0;
+                width: 100%;
+                height: 55vh;
+                order: 2;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .lp-hero__char { transition: none; }
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-28663144-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -110,20 +183,25 @@
 
     <main>
         <section class="lp-hero">
+            <div class="lp-hero__chars" aria-hidden="true">
+                <img class="lp-hero__char lp-hero__char--a" alt="" decoding="async">
+                <img class="lp-hero__char lp-hero__char--b" alt="" decoding="async">
+            </div>
             <div class="lp-hero__inner">
                 <span class="lp-eyebrow">Character Designer · Based in California</span>
                 <h1 class="lp-hero__title">Character <span class="accent">Designer</span> Based in California.</h1>
                 <p class="lp-hero__lede">
-                    <strong>Julio Salvat</strong> is a software engineer, UI/UX designer, and character designer specializing in React, full-stack web applications, modern product design, dashboards, branding, 3D characters, and original animated character concepts. A character designer for animation building original casts, concept art, and illustrated worlds.
+                    <strong>Julio Salvat</strong> is a software engineer, UI/UX designer, and character designer specializing in React, full-stack web applications, modern product design, dashboards, branding, 3D characters, and original animated character concepts. A character designer for animation building original casts, concept art, and illustrated worlds. Character design is the part of my practice I never put down. While I spend most days writing code as a CTO, I've spent two decades building a parallel body of work as a <strong>character designer for animation</strong> — concepting heroes, villains, creatures, and ensemble casts that hold up across illustration, sequential art, and 3D production.
                 </p>
+                <p class="lp-hero__lede">My process starts with <strong>silhouette and read</strong>: a character has to work as a thumbnail before it works as a finished render. From there I push into shape language, color script, costume detail, and turnarounds...<a href="#lp-about" class="lp-cta2">Learn More </a></p>
                 <div class="lp-hero__actions">
-                    <a href="/characters" class="lp-cta">View Character Gallery <i class="fas fa-arrow-right"></i></a>
-                    <a href="mailto:code@juliosalvat.com" class="lp-cta lp-cta--ghost">Commission Work <i class="fas fa-arrow-right"></i></a>
+                    <a href="#lp-about" class="lp-cta">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <a href="#lp-gallery" class="lp-cta lp-cta--ghost">View Gallery <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </section>
 
-        <section class="lp-section lp-section--accent">
+        <section class="lp-section lp-section--accent" id="lp-about">
             <div class="lp-section__inner">
                 <header class="lp-section__header">
                     <span class="lp-eyebrow">About</span>
@@ -197,7 +275,7 @@
             </div>
         </section>
 
-        <section class="lp-section lp-section--accent">
+        <section class="lp-section lp-section--accent" id="lp-gallery">
             <div class="lp-section__inner">
                 <header class="lp-section__header">
                     <span class="lp-eyebrow">Character Gallery</span>
@@ -284,5 +362,118 @@
     </footer>
 
     <script src="../js/script.js"></script>
+
+    <script>
+        (function () {
+            const SLIDES = [
+                'Nura__0000_Layer-236.png','Nura__0000_Layer-237.png','Nura__0001_Layer-240.png',
+                'Nura__0002_Layer-239.png','Nura__0003_Layer-238.png','Nura__0004_New-group.png',
+                'Nura__0005_Layer-236.png','Nura__0006_Layer-235.png','Nura__0007_Layer-234.png',
+                'Nura__0008_Layer-232.png','Nura__0009_Layer-231.png','Nura__0010_Layer-230.png',
+                'Nura__0011_Layer-229.png','Nura__0012_New-group.png','Nura__0013_Layer-228.png',
+                'Nura__0014_Layer-227.png','Nura__0015_Layer-226.png','Nura__0016_Layer-225.png',
+                'Nura__0017_Layer-224.png','Nura__0018_Layer-223.png','Nura__0019_Layer-222.png',
+                'Nura__0020_Layer-221.png','Nura__0021_Layer-220.png','Nura__0022_Layer-219.png',
+                'Nura__0023_Template.png','Nura__0024_Layer-218.png','Nura__0025_Layer-217.png',
+                'Nura__0026_Layer-216.png','Nura__0027_Layer-215.png','Nura__0028_Layer-214.png',
+                'Nura__0029_Layer-213.png','Nura__0030_Front.png','Nura__0031_Layer-212.png',
+                'Nura__0032_Layer-211.png','Nura__0033_Layer-210.png','Nura__0034_Layer-209.png',
+                'Nura__0035_Layer-208.png','Nura__0036_Layer-207.png','Nura__0037_Layer-206.png',
+                'Nura__0038_Front.png','Nura__0039_Layer-205.png','Nura__0040_Layer-204.png',
+                'Nura__0041_Layer-203.png','Nura__0042_Layer-202.png','Nura__0043_Layer-201.png',
+                'Nura__0044_Group-11.png','Nura__0045_Layer-197.png','Nura__0046_Layer-196.png',
+                'Nura__0047_Layer-195.png','Nura__0048_Layer-194.png','Nura__0049_Layer-193.png',
+                'Nura__0050_Layer-192.png','Nura__0051_Layer-191.png','Nura__0052_Layer-190.png',
+                'Nura__0053_Layer-189.png','Nura__0054_Layer-188.png','Nura__0055_Layer-187.png',
+                'Nura__0056_Layer-186.png','Nura__0057_Layer-185.png','Nura__0058_Layer-184.png',
+                'Nura__0059_Layer-183.png','Nura__0060_Group-10.png','Nura__0061_Layer-182.png',
+                'Nura__0062_Layer-181.png','Nura__0063_Layer-180.png','Nura__0064_Layer-179.png',
+                'Nura__0065_Layer-178.png','Nura__0066_New-group.png','Nura__0067_Layer-177.png',
+                'Nura__0068_Layer-176.png','Nura__0069_Group-9.png','Nura__0070_Layer-175.png',
+                'Nura__0071_New-group.png','Nura__0072_Shape-11.png','Nura__0073_Layer-174.png',
+                'Nura__0074_Layer-173.png','Nura__0075_Layer-172.png','Nura__0076_Layer-171.png',
+                'Nura__0077_Layer-170.png','Nura__0078_Layer-169.png','Nura__0079_Layer-168.png',
+                'Nura__0080_Layer-167.png','Nura__0081_Layer-166.png','Nura__0082_New-group.png',
+                'Nura__0083_Layer-164.png','Nura__0084_Layer-163.png','Nura__0085_Layer-162.png',
+                'Nura__0086_Layer-3-copy-2.png','Nura__0087_Layer-161.png','Nura__0088_Layer-160.png',
+                'Nura__0089_Layer-159.png','Nura__0090_Layer-158.png','Nura__0091_New-group.png',
+                'Nura__0092_Layer-157.png','Nura__0093_New-group.png','Nura__0094_New-group.png',
+                'Nura__0095_New-group.png','Nura__0096_New-group.png','Nura__0097_Layer-156.png',
+                'Nura__0098_Layer-155.png','Nura__0099_New-group.png','Nura__0100_Group-8.png',
+                'Nura__0101_Layer-152.png','Nura__0102_Layer-151.png','Nura__0103_Group-7.png',
+                'Nura__0104_Group-6.png','Nura__0105_Group-5.png','Nura__0106_Group-4.png',
+                'Nura__0107_Layer-136.png','Nura__0108_Group-2.png','Nura__0109_Group-1.png',
+                'Nura__0110_Layer-23.png','Nura__0111_Layer-22.png','Nura__0112_Layer-21.png',
+                'Nura__0113_Layer-20.png','Nura__0114_Layer-19.png','Nura__0115_Layer-18.png',
+                'Nura__0116_Layer-241.png','Nura__0117_Layer-16.png','Nura__0118_Layer-15.png',
+                'Nura__0119_Layer-14.png','Nura__0120_Layer-13.png','Nura__0121_Group-1.png',
+                'Nura__0122_Layer-9.png','Nura__0123_Layer-8.png','Nura__0124_Layer-7.png',
+                'Nura__0125_Layer-6.png','Nura__0126_Layer-5.png','Nura__0127_From-selection.png',
+                'Nura__0128_From-selection.png','Nura__0129_Layer-4.png','Nura__0130_Layer-3.png',
+                'Nura__0131_Layer-2.png','Nura__0132_Layer-1.png','Nura__0133_Group-3.png'
+            ];
+            const BASE = '../images/characters/';
+
+            const imgs = [
+                document.querySelector('.lp-hero__char--a'),
+                document.querySelector('.lp-hero__char--b')
+            ];
+            if (!imgs[0] || !imgs[1]) return;
+
+            let activeIdx = 0;
+            let currentFile = null;
+            const HOLD_MS = 4500;
+            const FADE_MS = 1600;
+
+            function pick() {
+                let next;
+                let guard = 0;
+                do {
+                    next = SLIDES[Math.floor(Math.random() * SLIDES.length)];
+                    guard++;
+                } while (next === currentFile && guard < 20);
+                return next;
+            }
+
+            function preload(src) {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = img.onerror = () => resolve();
+                    img.src = src;
+                });
+            }
+
+            async function showFirst() {
+                const file = pick();
+                currentFile = file;
+                await preload(BASE + file);
+                imgs[activeIdx].src = BASE + file;
+                requestAnimationFrame(() => {
+                    imgs[activeIdx].classList.add('is-visible');
+                    setTimeout(cycle, HOLD_MS);
+                });
+            }
+
+            async function cycle() {
+                const incomingIdx = 1 - activeIdx;
+                const incoming = imgs[incomingIdx];
+                const outgoing = imgs[activeIdx];
+
+                const file = pick();
+                currentFile = file;
+                await preload(BASE + file);
+                incoming.src = BASE + file;
+
+                requestAnimationFrame(() => {
+                    incoming.classList.add('is-visible');
+                    outgoing.classList.remove('is-visible');
+                    activeIdx = incomingIdx;
+                    setTimeout(cycle, HOLD_MS + FADE_MS);
+                });
+            }
+
+            showFirst();
+        })();
+    </script>
 </body>
 </html>

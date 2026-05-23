@@ -152,6 +152,16 @@ body.landing-page {
 }
 .lp-cta i { font-size: 1.3rem; }
 
+.lp-cta2 {    
+    text-decoration: none;
+    color:#00b2ff;
+    font-weight: bold;
+}
+
+.lp-cta2:hover {
+    color:#fff;
+}
+
 /* ============================================================
  * GENERIC SECTION
  * ============================================================ */

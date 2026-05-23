@@ -160,6 +160,120 @@
                 box-sizing: border-box;
             }
         }
+
+        .model-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        .model-gallery__card {
+            position: relative;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .model-gallery__card:hover {
+            transform: translateY(-4px);
+            border-color: var(--js-accent);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, .55), 0 0 0 1px var(--js-accent);
+        }
+        .model-gallery__viewer {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: transparent;
+            touch-action: none;
+            cursor: grab;
+        }
+        .model-gallery__viewer:active { cursor: grabbing; }
+        .model-gallery__viewer canvas { display: block; width: 100%; height: 100%; }
+        .model-gallery__loading {
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255, 255, 255, 0.75);
+            font-family: 'Lato', sans-serif; font-weight: 300;
+            letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem;
+            pointer-events: none;
+            text-align: center;
+            padding: 1rem;
+        }
+        .model-gallery__label {
+            padding: 1.6rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+        .model-gallery__name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+            letter-spacing: 0.02em;
+        }
+        .model-gallery__hint {
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        /* Gallery — tablet (2 columns) */
+        @media (max-width: 1024px) {
+            .model-gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2.4rem;
+            }
+        }
+
+        /* Gallery — mobile (1 column) */
+        @media (max-width: 640px) {
+            .model-gallery {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-top: 1rem;
+            }
+            .model-gallery__card {
+                border-radius: 14px;
+            }
+            .model-gallery__viewer {
+                aspect-ratio: 4 / 3;
+                min-height: 280px;
+                border: 2px solid rgba(0, 178, 255, 0.35);
+                border-radius: 14px 14px 0 0;
+                box-sizing: border-box;
+            }
+            .model-gallery__label {
+                padding: 1.2rem 1.6rem;
+            }
+            .model-gallery__name {
+                font-size: 1.6rem;
+            }
+            .model-gallery__hint {
+                font-size: 0.85rem;
+                letter-spacing: 0.08em;
+            }
+            /* Disable hover-lift on touch — it lingers awkwardly after tap */
+            .model-gallery__card:hover {
+                transform: none;
+            }
+        }
+
+        /* Gallery — very small screens */
+        @media (max-width: 380px) {
+            .model-gallery__viewer { min-height: 240px; }
+            .model-gallery__label {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.4rem;
+            }
+        }
+
         html { scroll-behavior: smooth; }
     </style>
 
@@ -264,7 +378,7 @@
                     </p>
                     <div class="lp-hero__actions">
                         <a href="#lp-about" class="lp-cta">Learn More <i class="fas fa-arrow-right"></i></a>
-                        <a href="mailto:code@juliosalvat.com" class="lp-cta lp-cta--ghost">Commission Work <i class="fas fa-arrow-right"></i></a>
+                        <a href="#lp-gallery" class="lp-cta lp-cta--ghost">View Gallery <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="lp-hero__model-label">
@@ -354,35 +468,41 @@
             </div>
         </section>
 
-        <section class="lp-section lp-section--accent">
+        <section class="lp-section lp-section--accent" id="lp-gallery">
             <div class="lp-section__inner">
                 <header class="lp-section__header">
-                    <span class="lp-eyebrow">3D Work</span>
-                    <h2 class="lp-section__title">Selected 3D character work.</h2>
-                    <p class="lp-section__desc"><a href="/characters" style="color:#fff;border-bottom:1px solid var(--js-accent);">View the full character gallery &#x2192;</a></p>
+                    <span class="lp-eyebrow">Interactive 3D Gallery</span>
+                    <h2 class="lp-section__title">Explore the <span class="accent">3D models.</span></h2>
+                    <p class="lp-section__desc">Drag to rotate · Scroll to zoom · Each model rendered live in your browser.</p>
                 </header>
-                <div class="lp-projects">
-                    <a href="/characters" class="lp-project">
-                        <img src="../images/characters/Nura__0000_Layer-237.png" alt="Nura — 3D character" class="lp-project__img">
-                        <div class="lp-project__overlay">
-                            <p class="lp-project__tag">3D · Sculpt</p>
-                            <h3 class="lp-project__title">Nura</h3>
+                <div class="model-gallery">
+                    <div class="model-gallery__card">
+                        <div class="model-gallery__viewer" data-model="gordie/gordie.gltf" data-name="Gordie">
+                            <div class="model-gallery__loading">Loading model…</div>
                         </div>
-                    </a>
-                    <a href="/ai-animation" class="lp-project">
-                        <img src="../images/characters/Nura__0008_Layer-232.png" alt="Character in motion" class="lp-project__img">
-                        <div class="lp-project__overlay">
-                            <p class="lp-project__tag">Animation</p>
-                            <h3 class="lp-project__title">AI Animation Reel</h3>
+                        <div class="model-gallery__label">
+                            <h3 class="model-gallery__name">Gordie</h3>
+                            <span class="model-gallery__hint">Drag · Zoom</span>
                         </div>
-                    </a>
-                    <a href="/characters" class="lp-project">
-                        <img src="../images/characters/Nura__0023_Template.png" alt="Character turnaround" class="lp-project__img">
-                        <div class="lp-project__overlay">
-                            <p class="lp-project__tag">Turnaround</p>
-                            <h3 class="lp-project__title">Full Turnaround</h3>
+                    </div>
+                    <div class="model-gallery__card">
+                        <div class="model-gallery__viewer" data-model="arms/arms.gltf" data-name="Arms">
+                            <div class="model-gallery__loading">Loading model…</div>
                         </div>
-                    </a>
+                        <div class="model-gallery__label">
+                            <h3 class="model-gallery__name">Arms</h3>
+                            <span class="model-gallery__hint">Drag · Zoom</span>
+                        </div>
+                    </div>
+                    <div class="model-gallery__card">
+                        <div class="model-gallery__viewer" data-model="leap/Leap.gltf" data-name="Leap">
+                            <div class="model-gallery__loading">Loading model…</div>
+                        </div>
+                        <div class="model-gallery__label">
+                            <h3 class="model-gallery__name">Leap</h3>
+                            <span class="model-gallery__hint">Drag · Zoom</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -549,6 +669,132 @@
             renderer.render(scene, camera);
         }
         animate();
+
+        // -------- Gallery viewers (gordie / arms / leap) --------
+        const envTexture = scene.environment;
+
+        function createGalleryViewer(container) {
+            const modelPath = container.dataset.model;
+            const loadingEl = container.querySelector('.model-gallery__loading');
+
+            const gScene = new THREE.Scene();
+            gScene.environment = envTexture;
+
+            const gCamera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 0.1, 1000);
+
+            const gRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            gRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            gRenderer.setSize(container.clientWidth, container.clientHeight);
+            gRenderer.setClearColor(0x000000, 0);
+            gRenderer.outputColorSpace = THREE.SRGBColorSpace;
+            gRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+            gRenderer.toneMappingExposure = 1.35;
+            container.appendChild(gRenderer.domElement);
+
+            gScene.add(new THREE.HemisphereLight(0xffffff, 0xbbccdd, 1.1));
+            gScene.add(new THREE.AmbientLight(0xffffff, 0.4));
+
+            const k = new THREE.DirectionalLight(0xffffff, 2.4);
+            k.position.set(4, 6, 5);
+            gScene.add(k);
+
+            const f = new THREE.DirectionalLight(0xffffff, 1.2);
+            f.position.set(-5, 2, 3);
+            gScene.add(f);
+
+            const r = new THREE.DirectionalLight(0xffffff, 1.4);
+            r.position.set(0, 4, -6);
+            gScene.add(r);
+
+            const top = new THREE.DirectionalLight(0xffffff, 0.8);
+            top.position.set(0, 8, 0);
+            gScene.add(top);
+
+            const gControls = new OrbitControls(gCamera, gRenderer.domElement);
+            gControls.enableDamping = true;
+            gControls.dampingFactor = 0.08;
+            gControls.enablePan = false;
+            gControls.autoRotate = true;
+            gControls.autoRotateSpeed = 0.6;
+
+            // Stop auto-rotate once the user interacts
+            gRenderer.domElement.addEventListener('pointerdown', () => {
+                gControls.autoRotate = false;
+            }, { once: true });
+            gRenderer.domElement.addEventListener('wheel', () => {
+                gControls.autoRotate = false;
+            }, { once: true, passive: true });
+
+            loader.load(
+                modelPath,
+                (gltf) => {
+                    const model = gltf.scene;
+                    const box = new THREE.Box3().setFromObject(model);
+                    const size = box.getSize(new THREE.Vector3());
+                    const center = box.getCenter(new THREE.Vector3());
+
+                    model.position.sub(center);
+
+                    const maxDim = Math.max(size.x, size.y, size.z);
+                    const fitDistance = maxDim / (2 * Math.tan((Math.PI * gCamera.fov) / 360));
+                    gCamera.position.set(fitDistance * 0.55, fitDistance * 0.25, fitDistance * 1.3);
+                    gControls.target.set(0, 0, 0);
+                    gControls.minDistance = fitDistance * 0.6;
+                    gControls.maxDistance = fitDistance * 3;
+                    gControls.update();
+
+                    gScene.add(model);
+                    if (loadingEl) loadingEl.style.display = 'none';
+                },
+                (xhr) => {
+                    if (loadingEl && xhr.total) {
+                        const pct = Math.round((xhr.loaded / xhr.total) * 100);
+                        loadingEl.textContent = `Loading… ${pct}%`;
+                    }
+                },
+                (err) => {
+                    console.error(`Failed to load ${modelPath}`, err);
+                    if (loadingEl) loadingEl.textContent = 'Failed to load model';
+                }
+            );
+
+            function onGalleryResize() {
+                const w = container.clientWidth;
+                const h = container.clientHeight;
+                if (!w || !h) return;
+                gCamera.aspect = w / h;
+                gCamera.updateProjectionMatrix();
+                gRenderer.setSize(w, h);
+            }
+            window.addEventListener('resize', onGalleryResize);
+
+            let visible = true;
+            const visObserver = new IntersectionObserver((entries) => {
+                entries.forEach(e => { visible = e.isIntersecting; });
+            }, { threshold: 0.01 });
+            visObserver.observe(container);
+
+            function gAnimate() {
+                requestAnimationFrame(gAnimate);
+                if (!visible) return;
+                gControls.update();
+                gRenderer.render(gScene, gCamera);
+            }
+            gAnimate();
+        }
+
+        const galleryViewers = document.querySelectorAll('.model-gallery__viewer');
+        if (galleryViewers.length) {
+            const initObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        createGalleryViewer(entry.target);
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '200px' });
+            galleryViewers.forEach(v => initObserver.observe(v));
+        }
     </script>
 </body>
 </html>
