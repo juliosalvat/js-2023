@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../favicon.ico" sizes="any">
+        <link rel="icon" href="../icon.svg" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+        <title>AI Animation Reel — Julio Salvat, Based in California</title>
+        <meta name="description" content="AI animation reel by Julio Salvat — original animated character concepts using modern AI-driven pipelines. By a California-based designer.">
+        <meta name="keywords" content="AI animation, AI character animation, AI animation reel, animated character concepts, character designer for animation, 3D character designer">
+        <meta name="author" content="Julio Salvat">
+        <link rel="canonical" href="https://juliosalvat.com/ai-generated-animation/">
+
+        <meta property="og:type" content="profile">
+        <meta property="og:title" content="AI Animation Reel — Julio Salvat">
+        <meta property="og:description" content="Original animated character concepts using modern AI-driven animation pipelines.">
+        <meta property="og:url" content="https://juliosalvat.com/ai-generated-animation/">
+        <meta property="og:image" content="https://juliosalvat.com/img/julio.png">
+        <meta property="og:site_name" content="Julio Salvat">
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="AI Animation Reel | Julio Salvat">
+        <meta name="twitter:description" content="Original animated character concepts using modern AI-driven animation pipelines.">
+        <meta name="twitter:image" content="https://juliosalvat.com/img/julio.png">
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Julio Salvat",
+            "url": "https://juliosalvat.com",
+            "image": "https://juliosalvat.com/img/julio.png",
+            "email": "code@juliosalvat.com",
+            "address": {
+                "@type": "PostalAddress",
+                "addressRegion": "California",
+                "addressCountry": "US"
+            },
+            "jobTitle": [
+                "Software Engineer",
+                "UI/UX Designer",
+                "Character Designer",
+                "Full Stack Developer"
+            ],
+            "description": "Julio Salvat is a software engineer, UI/UX designer, and character designer specializing in React, full-stack web applications, modern UI/UX design, dashboards, branding, 3D character design, and original animated character concepts.",
+            "knowsAbout": [
+                "React",
+                "JavaScript",
+                "Node.js",
+                "Full Stack Development",
+                "UI/UX Design",
+                "Product Design",
+                "Dashboard Design",
+                "Character Design",
+                "3D Modeling",
+                "Animation",
+                "Brand Identity",
+                "AI Automation",
+                "AWS",
+                "Python",
+                "Django"
+            ],
+            "sameAs": [
+                "https://www.linkedin.com/in/juliosalvat/",
+                "https://github.com/juliosalvat",
+                "https://twitter.com/juliosalvatjr"
+            ]
+        }
+        </script>
+
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/d9137117d7.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../css/style.css">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-28663144-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-28663144-1');
+        </script>
+
+        <style>
+            :root {
+                --js-accent: #00b2ff;
+                --js-accent-dark: #0089c7;
+                --ai-bg: #0a0d14;
+                --ai-surface: #11151f;
+                --ai-card: #161b27;
+                --ai-border: rgba(255, 255, 255, .08);
+                --ai-text: #ffffff;
+                --ai-muted: #8a93a6;
+                --ai-dim: #5d6478;
+                --ai-radius: 14px;
+                --ai-radius-lg: 22px;
+                --ai-ease: cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            html { scroll-behavior: smooth; }
+
+            body {
+                background-color: var(--ai-bg);
+                color: var(--ai-text);
+                font-family: "Lato", sans-serif;
+            }
+
+            /* Logo (top-left) */
+            .header__logo-box {
+                position: fixed;
+                top: 2.5rem;
+                left: 3rem;
+                z-index: 1000;
+            }
+            .header__logo {
+                height: 5rem;
+                margin: 0;
+                filter: brightness(0) invert(1);
+                opacity: .95;
+            }
+
+            /* Top-right "Let's Connect" link (clears the hamburger button) */
+            .ai-connect {
+                position: fixed;
+                top: 4rem;
+                right: 16rem;
+                z-index: 1500;
+                color: var(--ai-muted);
+                text-decoration: none;
+                font-size: .85rem;
+                letter-spacing: .28rem;
+                text-transform: uppercase;
+                font-weight: 700;
+                display: inline-flex;
+                align-items: center;
+                gap: .7rem;
+                transition: color .25s var(--ai-ease);
+            }
+            .ai-connect:hover {
+                color: #fff;
+            }
+            .ai-connect i {
+                color: var(--js-accent);
+                transition: transform .25s var(--ai-ease);
+            }
+            .ai-connect:hover i {
+                transform: translateX(4px);
+            }
+
+            /* Shared small eyebrow style */
+            .ai-eyebrow {
+                display: inline-flex;
+                align-items: center;
+                gap: .7rem;
+                font-size: .72rem;
+                font-weight: 700;
+                letter-spacing: .35rem;
+                text-transform: uppercase;
+                color: var(--ai-muted);
+                margin-bottom: 1.4rem;
+            }
+            .ai-eyebrow::before {
+                content: "";
+                width: 28px;
+                height: 2px;
+                background: var(--js-accent);
+                display: inline-block;
+            }
+
+            /* =========== HERO =========== */
+            .ai-hero {
+                position: relative;
+                min-height: 100vh;
+                padding: 11rem 5rem 5rem;
+                display: grid;
+                grid-template-columns: 1fr 1.05fr 1fr;
+                gap: 4rem;
+                align-items: center;
+                background: var(--ai-bg);
+                color: var(--ai-text);
+                overflow: hidden;
+            }
+            .ai-hero::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-image:
+                    radial-gradient(circle at 20% 30%, rgba(0, 178, 255, .08), transparent 40%),
+                    radial-gradient(circle at 80% 70%, rgba(0, 178, 255, .06), transparent 45%);
+                pointer-events: none;
+                z-index: 0;
+            }
+            .ai-hero > * { position: relative; z-index: 1; }
+
+            /* Left column */
+            .ai-hero__left {
+                max-width: 420px;
+            }
+            .ai-hero__title {
+                font-size: clamp(2.6rem, 4.2vw, 4.2rem);
+                font-weight: 900;
+                line-height: 1.04;
+                letter-spacing: -.01em;
+                margin: 0 0 1.6rem;
+                color: #fff;
+            }
+            .ai-hero__title .accent {
+                color: var(--js-accent);
+            }
+            .ai-hero__desc {
+                font-size: 1rem;
+                line-height: 1.7;
+                color: var(--ai-muted);
+                margin: 0 0 2.4rem;
+                max-width: 360px;
+            }
+            .ai-hero__cta {
+                display: inline-flex;
+                align-items: center;
+                gap: .8rem;
+                padding: 1rem 1.8rem;
+                background: transparent;
+                color: #fff;
+                border: 1px solid rgba(255,255,255,.18);
+                border-radius: 999px;
+                font-weight: 700;
+                letter-spacing: .22rem;
+                text-transform: uppercase;
+                text-decoration: none;
+                font-size: .78rem;
+                transition: background .25s var(--ai-ease), border-color .25s var(--ai-ease), color .25s var(--ai-ease);
+            }
+            .ai-hero__cta:hover {
+                background: var(--js-accent);
+                border-color: var(--js-accent);
+                color: #001724;
+            }
+            .ai-hero__cta i {
+                color: var(--js-accent);
+                font-size: .9rem;
+                transition: color .25s var(--ai-ease), transform .25s var(--ai-ease);
+            }
+            .ai-hero__cta:hover i {
+                color: #001724;
+                transform: translateX(3px);
+            }
+
+            /* Center column — featured player */
+            .ai-hero__center {
+                position: relative;
+                width: 100%;
+                max-width: 360px;
+                margin: 0 auto;
+            }
+            .ai-player {
+                position: relative;
+                aspect-ratio: 9 / 16;
+                background: #000;
+                border-radius: var(--ai-radius-lg);
+                overflow: hidden;
+                box-shadow:
+                    0 30px 60px rgba(0,0,0,.55),
+                    0 0 0 1px var(--ai-border);
+            }
+            .ai-player__video {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                background: #000;
+            }
+            .ai-player__topbar {
+                position: absolute;
+                top: 1rem;
+                left: 1rem;
+                right: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                z-index: 2;
+            }
+            .ai-player__badge {
+                display: inline-flex;
+                align-items: center;
+                gap: .45rem;
+                background: rgba(0,0,0,.5);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                color: #fff;
+                font-size: .65rem;
+                letter-spacing: .2rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                padding: .35rem .7rem;
+                border-radius: 999px;
+            }
+            .ai-player__badge i {
+                color: var(--js-accent);
+                font-size: .55rem;
+            }
+            .ai-player__expand {
+                width: 2rem;
+                height: 2rem;
+                border-radius: 8px;
+                background: rgba(0,0,0,.5);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                color: #fff;
+                border: none;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                font-size: .8rem;
+                transition: background .25s var(--ai-ease);
+            }
+            .ai-player__expand:hover {
+                background: rgba(0, 178, 255, .8);
+            }
+            .ai-player__controls {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                padding: 1rem 1.2rem 1.1rem;
+                display: flex;
+                align-items: center;
+                gap: .9rem;
+                background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.7));
+                z-index: 2;
+            }
+            .ai-player__playbtn {
+                flex: 0 0 auto;
+                width: 2.4rem;
+                height: 2.4rem;
+                border-radius: 50%;
+                background: rgba(255,255,255,.95);
+                color: #001724;
+                border: none;
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: .85rem;
+                padding-left: 3px;
+                transition: transform .25s var(--ai-ease);
+            }
+            .ai-player__playbtn:hover { transform: scale(1.06); }
+            .ai-player__playbtn.is-playing { padding-left: 0; }
+            .ai-player__progress {
+                flex: 1 1 auto;
+                height: 3px;
+                background: rgba(255,255,255,.2);
+                border-radius: 99px;
+                cursor: pointer;
+                position: relative;
+            }
+            .ai-player__progress-bar {
+                position: absolute;
+                inset: 0;
+                width: 0%;
+                background: var(--js-accent);
+                border-radius: 99px;
+                transition: width .12s linear;
+            }
+            .ai-player__time {
+                flex: 0 0 auto;
+                font-size: .7rem;
+                font-weight: 600;
+                color: rgba(255,255,255,.85);
+                letter-spacing: .05rem;
+                font-variant-numeric: tabular-nums;
+                min-width: 80px;
+                text-align: right;
+            }
+
+            /* Center column — prev/next nav */
+            .ai-player__nav {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 2.6rem;
+                height: 2.6rem;
+                border-radius: 50%;
+                background: rgba(255,255,255,.08);
+                color: #fff;
+                border: 1px solid rgba(255,255,255,.15);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                z-index: 3;
+                transition: background .25s var(--ai-ease), border-color .25s var(--ai-ease), transform .25s var(--ai-ease);
+            }
+            .ai-player__nav:hover {
+                background: var(--js-accent);
+                border-color: var(--js-accent);
+                color: #001724;
+            }
+            .ai-player__nav--prev { left: -3.5rem; }
+            .ai-player__nav--next { right: -3.5rem; }
+            .ai-player__nav:hover { transform: translateY(-50%) scale(1.06); }
+
+            /* Pagination dots */
+            .ai-player__dots {
+                position: absolute;
+                left: 50%;
+                bottom: -3.2rem;
+                transform: translateX(-50%);
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                max-width: 340px;
+                gap: .3rem;
+                z-index: 2;
+            }
+            .ai-player__dot {
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background: rgba(255,255,255,.22);
+                cursor: pointer;
+                transition: background .25s var(--ai-ease), transform .25s var(--ai-ease);
+            }
+            .ai-player__dot:hover {
+                background: rgba(255,255,255,.55);
+            }
+            .ai-player__dot.is-active {
+                background: var(--js-accent);
+                transform: scale(1.5);
+            }
+
+            /* Right column */
+            .ai-hero__right {
+                max-width: 340px;
+                margin-left: auto;
+            }
+            .ai-feature-title {
+                font-size: clamp(2.4rem, 3.2vw, 3rem);
+                font-weight: 900;
+                line-height: 1.04;
+                margin: 0 0 .35rem;
+                color: var(--js-accent);
+            }
+            .ai-feature-subtitle {
+                font-size: .95rem;
+                font-weight: 600;
+                color: var(--ai-muted);
+                margin: 0 0 1.4rem;
+                letter-spacing: .02rem;
+            }
+            .ai-feature-desc {
+                font-size: .92rem;
+                line-height: 1.7;
+                color: var(--ai-muted);
+                margin: 0 0 1.6rem;
+            }
+            .ai-feature-meta {
+                margin: 0 0 1.8rem;
+                padding: 0;
+                font-size: .88rem;
+            }
+            .ai-feature-meta__row {
+                display: grid;
+                grid-template-columns: 100px 1fr;
+                gap: 1rem;
+                padding: .55rem 0;
+                border-bottom: 1px solid var(--ai-border);
+            }
+            .ai-feature-meta__row:last-child { border-bottom: none; }
+            .ai-feature-meta__label {
+                color: var(--ai-dim);
+                font-weight: 700;
+                letter-spacing: .18rem;
+                text-transform: uppercase;
+                font-size: .7rem;
+                align-self: center;
+            }
+            .ai-feature-meta__value {
+                color: var(--ai-text);
+                font-weight: 600;
+            }
+            .ai-feature-cta {
+                display: inline-flex;
+                align-items: center;
+                gap: .6rem;
+                color: #fff;
+                text-decoration: none;
+                font-size: .8rem;
+                font-weight: 700;
+                letter-spacing: .25rem;
+                text-transform: uppercase;
+                padding-bottom: .35rem;
+                border-bottom: 1px solid var(--js-accent);
+                transition: gap .25s var(--ai-ease), color .25s var(--ai-ease);
+            }
+            .ai-feature-cta i {
+                color: var(--js-accent);
+                font-size: .85rem;
+            }
+            .ai-feature-cta:hover {
+                gap: 1rem;
+                color: var(--js-accent);
+            }
+
+            /* =========== STORIES RAIL =========== */
+            .ai-stories {
+                padding: 7rem 5rem 8rem;
+                background: var(--ai-bg);
+                color: var(--ai-text);
+            }
+            .ai-stories__header {
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-between;
+                gap: 2rem;
+                flex-wrap: wrap;
+                margin-bottom: 3rem;
+            }
+            .ai-stories__heading-block { max-width: 600px; }
+            .ai-stories__eyebrow {
+                font-size: .7rem;
+                font-weight: 700;
+                letter-spacing: .35rem;
+                text-transform: uppercase;
+                color: var(--ai-dim);
+                margin-bottom: 1rem;
+                display: inline-flex;
+                align-items: center;
+                gap: .6rem;
+            }
+            .ai-stories__eyebrow::before {
+                content: "";
+                width: 28px;
+                height: 2px;
+                background: var(--js-accent);
+            }
+            .ai-stories__title {
+                font-size: clamp(2rem, 3vw, 2.8rem);
+                font-weight: 900;
+                line-height: 1.1;
+                margin: 0;
+                color: #fff;
+            }
+            .ai-stories__title .accent { color: var(--js-accent); }
+            .ai-stories__explore {
+                color: var(--ai-muted);
+                text-decoration: none;
+                font-size: .78rem;
+                font-weight: 700;
+                letter-spacing: .28rem;
+                text-transform: uppercase;
+                display: inline-flex;
+                align-items: center;
+                gap: .7rem;
+                padding-bottom: .35rem;
+                border-bottom: 1px solid var(--ai-border);
+                transition: color .25s var(--ai-ease), gap .25s var(--ai-ease), border-color .25s var(--ai-ease);
+            }
+            .ai-stories__explore i { color: var(--js-accent); }
+            .ai-stories__explore:hover {
+                color: #fff;
+                gap: 1rem;
+                border-bottom-color: var(--js-accent);
+            }
+
+            .ai-stories__rail-wrap {
+                position: relative;
+            }
+            .rail-edge-hint {
+                position: absolute;
+                top: 0;
+                bottom: 1.6rem;
+                width: clamp(56px, 7%, 90px);
+                z-index: 5;
+                display: flex;
+                align-items: center;
+                opacity: 0;
+                transition: opacity .25s ease;
+                pointer-events: none;
+            }
+            .rail-edge-hint--left {
+                left: 0;
+                justify-content: flex-start;
+                padding-left: 1.2rem;
+                background: linear-gradient(90deg, rgba(10, 13, 20, .75), rgba(10, 13, 20, 0));
+            }
+            .rail-edge-hint--right {
+                right: 0;
+                justify-content: flex-end;
+                padding-right: 1.2rem;
+                background: linear-gradient(-90deg, rgba(10, 13, 20, .75), rgba(10, 13, 20, 0));
+            }
+            .rail-edge-hint.is-active { opacity: 1; }
+            .rail-edge-hint i {
+                color: var(--js-accent);
+                font-size: 1.8rem;
+                text-shadow: 0 2px 10px rgba(0, 0, 0, .8);
+            }
+            @media (hover: none) { .rail-edge-hint { display: none; } }
+            .ai-stories__rail {
+                display: grid;
+                grid-auto-flow: column;
+                grid-auto-columns: minmax(220px, 1fr);
+                gap: 1.6rem;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                padding: .5rem .25rem 1.5rem;
+                scrollbar-width: thin;
+                scrollbar-color: var(--js-accent) transparent;
+            }
+            .ai-stories__rail::-webkit-scrollbar { height: 6px; }
+            .ai-stories__rail::-webkit-scrollbar-track { background: transparent; }
+            .ai-stories__rail::-webkit-scrollbar-thumb {
+                background: rgba(0, 178, 255, .4);
+                border-radius: 99px;
+            }
+
+            /* Story card */
+            .story-card {
+                position: relative;
+                aspect-ratio: 6 / 17;
+                border-radius: var(--ai-radius);
+                overflow: hidden;
+                background: var(--ai-card);
+                cursor: pointer;
+                border: none;
+                padding: 0;
+                scroll-snap-align: start;
+                box-shadow: 0 8px 24px rgba(0,0,0,.4);
+                transition: transform .35s var(--ai-ease), box-shadow .35s var(--ai-ease);
+            }
+            .story-card:hover,
+            .story-card:focus-visible,
+            .story-card.is-active {
+                transform: translateY(-6px);
+                box-shadow: 0 18px 40px rgba(0,0,0,.55), 0 0 0 1px var(--js-accent);
+                outline: none;
+            }
+            .story-card.is-active {
+                box-shadow: 0 18px 40px rgba(0,0,0,.55), 0 0 0 2px var(--js-accent);
+            }
+            .story-card__media {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                background: #000;
+                transition: transform .8s var(--ai-ease), filter .4s ease;
+            }
+            .story-card:hover .story-card__media {
+                transform: scale(1.06);
+                filter: brightness(1.05);
+            }
+            .story-card__overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.9) 100%);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 1rem 1.1rem;
+                color: #fff;
+                pointer-events: none;
+            }
+            .story-card__title {
+                font-size: 1rem;
+                font-weight: 700;
+                letter-spacing: .02rem;
+                margin: 0;
+                text-transform: capitalize;
+                text-shadow: 0 2px 8px rgba(0,0,0,.6);
+            }
+            .story-card__meta {
+                font-size: .65rem;
+                font-weight: 700;
+                letter-spacing: .2rem;
+                text-transform: uppercase;
+                color: var(--ai-muted);
+                margin-bottom: .3rem;
+            }
+            .story-card__play {
+                position: absolute;
+                left: 1rem;
+                bottom: 1rem;
+                width: 2.6rem;
+                height: 2.6rem;
+                border-radius: 50%;
+                background: var(--js-accent);
+                color: #001724;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: .8rem;
+                padding-left: 3px;
+                box-shadow: 0 6px 16px rgba(0, 178, 255, .35);
+                z-index: 2;
+                pointer-events: none;
+                transition: transform .25s var(--ai-ease);
+            }
+            .story-card:hover .story-card__play {
+                transform: scale(1.08);
+            }
+            .story-card__playlabel {
+                position: absolute;
+                right: 1rem;
+                bottom: 1.6rem;
+                font-size: .6rem;
+                font-weight: 700;
+                letter-spacing: .2rem;
+                text-transform: uppercase;
+                color: rgba(255,255,255,.7);
+                z-index: 2;
+                pointer-events: none;
+            }
+
+            /* Player modal */
+            .video-modal .modal-content {
+                background: #0a0a0a;
+                border: none;
+                border-radius: var(--ai-radius);
+                overflow: hidden;
+                color: #fff;
+            }
+            .video-modal .modal-header {
+                background: linear-gradient(180deg, rgba(0,0,0,.85), rgba(0,0,0,0));
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 5;
+                border: none;
+                padding: 1rem 1.4rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .video-modal .modal-title {
+                font-size: 1.1rem;
+                font-weight: 700;
+                letter-spacing: .15rem;
+                text-transform: uppercase;
+                margin: 0;
+                color: #fff;
+            }
+            .video-modal .btn-close-custom {
+                width: 2.4rem;
+                height: 2.4rem;
+                border-radius: 50%;
+                background: rgba(255,255,255,.12);
+                border: 1px solid rgba(255,255,255,.18);
+                color: #fff;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.1rem;
+                cursor: pointer;
+                transition: background .25s ease, transform .25s ease;
+            }
+            .video-modal .btn-close-custom:hover {
+                background: rgba(255,255,255,.22);
+                transform: rotate(90deg);
+            }
+            .video-modal .modal-body {
+                padding: 0;
+                background: #000;
+            }
+            .video-modal video {
+                width: 100%;
+                height: 100%;
+                display: block;
+                background: #000;
+                object-fit: contain;
+            }
+            .video-modal .modal-dialog {
+                max-width: 100vw;
+                width: 100%;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: calc(100vh - 1rem);
+            }
+            .video-modal .modal-content {
+                width: 100%;
+                aspect-ratio: 16 / 9;
+            }
+
+            /* Footer restore */
+            .footer .row {
+                display: block;
+                margin: 0 auto;
+                --bs-gutter-x: 0;
+                --bs-gutter-y: 0;
+            }
+            .footer .row::after { content: ""; display: table; clear: both; }
+
+            /* ===== Desktop responsive tweaks (above mobile breakpoint) ===== */
+            @media (max-width: 1200px) {
+                .ai-hero { padding: 10rem 3rem 4rem; gap: 2.5rem; }
+                .ai-stories { padding: 5rem 3rem 6rem; }
+                .ai-player__nav--prev { left: -2.5rem; }
+                .ai-player__nav--next { right: -2.5rem; }
+                .ai-connect { right: 14rem; }
+            }
+            @media (max-width: 992px) {
+                .ai-hero {
+                    grid-template-columns: 1fr;
+                    text-align: left;
+                    padding: 9rem 2.5rem 4rem;
+                }
+                .ai-hero__right { margin-left: 0; max-width: 100%; }
+                .ai-hero__left { max-width: 100%; }
+                .ai-hero__center { margin: 1rem auto; }
+                .ai-player__nav--prev { left: -1.5rem; }
+                .ai-player__nav--next { right: -1.5rem; }
+                .ai-stories { padding: 4rem 2.5rem 5rem; }
+                .header__logo { height: 4rem; }
+                .header__logo-box { top: 2rem; left: 2rem; }
+                .ai-connect { right: 12rem; top: 3rem; }
+            }
+
+            /* ============================================================
+             * MOBILE: keep the existing TikTok-style feed exactly as-is.
+             * Hide everything desktop on small screens.
+             * ============================================================ */
+            /* Feed styles applied at ALL widths — desktop mirrors mobile. */
+                .ai-hero,
+                .ai-stories,
+                .ai-connect,
+                .footer { display: none !important; }
+
+                body {
+                    background: var(--ai-bg);
+                    overflow: hidden;
+                    margin: 0;
+                    color: var(--ai-text);
+                }
+
+                /* Fixed, full-screen background image (same as the home page). */
+                .page-bg {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                    z-index: -1;
+                    pointer-events: none;
+                    user-select: none;
+                }
+
+                /* Dark scrim over the fixed image (matches the home page). */
+                body::before {
+                    content: "";
+                    position: fixed;
+                    inset: 0;
+                    background: rgba(10, 13, 20, .82);
+                    z-index: 0;
+                    pointer-events: none;
+                }
+
+                /* One-tap "enable sound" button (Chrome blocks autoplay-with-
+                   sound until the user interacts; scroll doesn't count). Shown
+                   only while we're forced to play muted. */
+                .tiktok-sound {
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 1200;
+                    display: none;
+                    align-items: center;
+                    gap: .8rem;
+                    padding: 1.2rem 2rem;
+                    background: rgba(0, 0, 0, .6);
+                    color: #fff;
+                    border: 1px solid rgba(255, 255, 255, .28);
+                    border-radius: 999px;
+                    font-family: "Lato", sans-serif;
+                    font-size: 1.4rem;
+                    font-weight: 700;
+                    letter-spacing: .15rem;
+                    text-transform: uppercase;
+                    cursor: pointer;
+                    backdrop-filter: blur(8px);
+                    -webkit-backdrop-filter: blur(8px);
+                    transition: background .2s ease, transform .2s ease;
+                }
+                .tiktok-sound.is-visible { display: inline-flex; }
+                .tiktok-sound:hover {
+                    background: rgba(0, 178, 255, .85);
+                    transform: translate(-50%, -50%) scale(1.04);
+                }
+                .tiktok-sound i { color: var(--js-accent); }
+                .tiktok-sound:hover i { color: #fff; }
+
+                /* Logo: mirrors the nav button — same size (7rem), opposite
+                   corner (top-left, since the nav button sits top-right). */
+                .header__logo-box {
+                    display: block;
+                    position: fixed;
+                    top: 6rem;
+                    left: 6rem;
+                    right: auto;
+                    transform: none;
+                    margin: 0;
+                    z-index: 1100;
+                    pointer-events: auto;
+                }
+                .header__logo {
+                    height: 7rem;
+                    width: auto;
+                    margin: 0;
+                    display: block;
+                    filter: none;
+                    opacity: 1;
+                }
+
+                .tiktok-feed {
+                    display: block;
+                    position: fixed;
+                    inset: 0;
+                    overflow-y: auto;
+                    scroll-snap-type: y mandatory;
+                    -webkit-overflow-scrolling: touch;
+                    overscroll-behavior-y: contain;
+                    background: transparent;
+                    z-index: 1;
+                }
+
+                .tiktok-item {
+                    position: relative;
+                    width: 100vw;
+                    height: 100vh;
+                    height: 100dvh;
+                    scroll-snap-align: start;
+                    scroll-snap-stop: always;
+                    background: transparent;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    overflow: hidden;
+                }
+
+                /* Frame wraps the video + overlays so they anchor to the
+                   video column on desktop and fill the screen on mobile. */
+                .tiktok-item__frame {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .tiktok-item__video {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center center;
+                    background: #000;
+                    display: block;
+                }
+
+                .tiktok-item__overlay {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    padding: 5rem 1.4rem calc(2rem + env(safe-area-inset-bottom, 0px));
+                    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.85) 100%);
+                    color: #fff;
+                    pointer-events: none;
+                }
+
+                .tiktok-item__meta {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: .5rem;
+                    font-size: .75rem;
+                    font-weight: 700;
+                    letter-spacing: .18rem;
+                    text-transform: uppercase;
+                    color: var(--js-accent);
+                    margin-bottom: .4rem;
+                }
+                .tiktok-item__meta::before {
+                    content: "";
+                    width: 22px;
+                    height: 2px;
+                    background: var(--js-accent);
+                }
+
+                .tiktok-item__title {
+                    font-size: 1.5rem;
+                    font-weight: 800;
+                    margin: 0;
+                    text-transform: capitalize;
+                    text-shadow: 0 2px 8px rgba(0,0,0,.6);
+                    letter-spacing: .02rem;
+                }
+
+                .tiktok-item__badge {
+                    position: absolute;
+                    top: calc(1rem + env(safe-area-inset-top, 0px));
+                    left: 1rem;
+                    background: rgba(0,0,0,.55);
+                    color: #fff;
+                    font-size: .65rem;
+                    letter-spacing: .12rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    padding: .3rem .65rem;
+                    border-radius: 999px;
+                    backdrop-filter: blur(6px);
+                    -webkit-backdrop-filter: blur(6px);
+                    display: inline-flex;
+                    align-items: center;
+                    gap: .35rem;
+                    z-index: 3;
+                }
+                .tiktok-item__badge i { color: var(--js-accent); }
+
+                .tiktok-item__playicon {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(.8);
+                    width: 5rem;
+                    height: 5rem;
+                    border-radius: 50%;
+                    background: rgba(0,0,0,.55);
+                    color: #fff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 1.8rem;
+                    padding-left: 6px;
+                    opacity: 0;
+                    transition: opacity .25s ease, transform .25s ease;
+                    pointer-events: none;
+                    backdrop-filter: blur(6px);
+                    -webkit-backdrop-filter: blur(6px);
+                }
+                .tiktok-item.is-paused .tiktok-item__playicon {
+                    opacity: 1;
+                    transform: translate(-50%, -50%) scale(1);
+                }
+
+                .tiktok-progress {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    height: 3px;
+                    background: rgba(255,255,255,.18);
+                    z-index: 2;
+                }
+                .tiktok-progress__bar {
+                    height: 100%;
+                    background: var(--js-accent);
+                    width: 0%;
+                }
+
+                .tiktok-hint {
+                    position: fixed;
+                    bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+                    left: 50%;
+                    transform: translateX(-50%);
+                    z-index: 1100;
+                    color: rgba(255,255,255,.85);
+                    font-size: .8rem;
+                    letter-spacing: .2rem;
+                    text-transform: uppercase;
+                    background: rgba(0,0,0,.4);
+                    border: 1px solid rgba(255,255,255,.15);
+                    padding: .55rem 1rem;
+                    border-radius: 999px;
+                    backdrop-filter: blur(8px);
+                    -webkit-backdrop-filter: blur(8px);
+                    pointer-events: none;
+                    animation: tiktokHint 3s ease forwards;
+                }
+                @keyframes tiktokHint {
+                    0%, 60% { opacity: 1; }
+                    100% { opacity: 0; transform: translate(-50%, 12px); }
+                }
+
+                @media (prefers-reduced-motion: reduce) {
+                    .tiktok-hint { animation: none; }
+                }
+
+            /* ===== Desktop: render the feed as a centered 9:16 phone column ===== */
+            @media (min-width: 769px) {
+                .tiktok-feed { overflow-x: hidden; }
+                .tiktok-item { width: 100%; }
+                .tiktok-item__frame {
+                    height: 90dvh;
+                    width: auto;
+                    aspect-ratio: 9 / 16;
+                    max-width: 92vw;
+                    border-radius: 28px;
+                    overflow: hidden;
+                    box-shadow:
+                        0 30px 80px rgba(0, 0, 0, .6),
+                        0 0 0 1px rgba(255, 255, 255, .07);
+                }
+                .tiktok-hint { bottom: 2.5rem; }
+            }
+
+            /* Logo mirrors the nav button's responsive positions
+               (nav button: top/right 4rem ≤900px, 3rem ≤600px). */
+            @media (max-width: 56.25em) {
+                .header__logo-box { top: 4rem; left: 4rem; }
+            }
+            @media (max-width: 37.5em) {
+                .header__logo-box { top: 3rem; left: 3rem; }
+            }
+
+            /* Reduced motion */
+            @media (prefers-reduced-motion: reduce) {
+                .story-card,
+                .story-card__media,
+                .ai-player__progress-bar { transition: none; }
+            }
+
+            /* ============================================================
+             * HERO TYPOGRAPHY BUMP
+             * css/style.css sets html { font-size: 62.5% } so 1rem = 10px.
+             * Originals were sized for a 16px base — bump them up.
+             * ============================================================ */
+            .ai-eyebrow { font-size: 1.3rem; }
+            .ai-hero__desc { font-size: 1.7rem; line-height: 1.7; max-width: 420px; }
+            .ai-hero__cta { font-size: 1.3rem; padding: 1.4rem 2.4rem; }
+            .ai-hero__cta i { font-size: 1.3rem; }
+            .ai-connect { font-size: 1.4rem; }
+            .ai-feature-subtitle { font-size: 1.6rem; }
+            .ai-feature-desc { font-size: 1.5rem; line-height: 1.7; }
+            .ai-feature-meta { font-size: 1.4rem; }
+            .ai-feature-meta__label { font-size: 1.1rem; }
+            .ai-feature-meta__value { font-size: 1.4rem; }
+            .ai-feature-cta { font-size: 1.3rem; }
+            .ai-feature-cta i { font-size: 1.3rem; }
+            .ai-player__badge { font-size: 1.05rem; padding: .55rem 1rem; }
+            .ai-player__time { font-size: 1.15rem; min-width: 110px; }
+        </style>
+    </head>
+    <body>
+        <img class="page-bg" src="../img/hero.jpg" alt="" aria-hidden="true">
+
+        <div class="navigation">
+            <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+            <label for="navi-toggle" class="navigation__button">
+                <span class="navigation__icon">&nbsp;</span>
+            </label>
+            <div class="navigation__background">&nbsp;</div>
+            <nav class="navigation__nav" id="myLink">
+                <ul class="navigation__list">
+                    <li class="navigation__item"><a href="/#about" class="navigation__link"><span>01</span>About</a></li>
+                    <li class="navigation__item"><a href="/#experience" class="navigation__link"><span>02</span>Experience</a></li>
+                    <li class="navigation__item"><a href="/#work" class="navigation__link"><span>03</span>Work</a></li>
+                    <li class="navigation__item"><a href="/character-designer" class="navigation__link"><span>04</span>Characters</a></li>
+                    <li class="navigation__item"><a href="/3d-character-design" class="navigation__link"><span>05</span>3D Characters</a></li>
+                    <li class="navigation__item"><a href="/ai-generated-animation/" class="navigation__link"><span>06</span>Ai Animation</a></li>
+                    <li class="navigation__item"><a href="https://docs.google.com/document/d/1tZZN1nZQJm8iqCBtq3CQUeT3_z-C_UNji-mWtqlMhcM/edit?usp=sharing" target="_blank" class="navigation__link"><span>07</span>Download Resume</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="header__logo-box">
+            <a href="/"><img src="../img/jslogo.png" alt="Logo" class="header__logo"/></a>
+        </div>
+
+        <a class="ai-connect" href="mailto:code@juliosalvat.com">Let's Connect <i class="fas fa-arrow-right"></i></a>
+
+        <!-- HERO ============================================ -->
+        <section class="ai-hero" role="banner">
+            <!-- LEFT: title + cta -->
+            <div class="ai-hero__left">
+                <span class="ai-eyebrow">AI Animation Reel</span>
+                <h1 class="ai-hero__title">
+                    Visual Stories<br>
+                    That <span class="accent">Connect.</span>
+                </h1>
+                <p class="ai-hero__desc">
+                    A self-produced collection of character work, AI-driven shorts, motion studies, and a lot of iteration.
+                </p>
+                <a href="#stories" class="ai-hero__cta">
+                    View Work <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- CENTER: featured video player -->
+            <div class="ai-hero__center">
+                <button type="button" class="ai-player__nav ai-player__nav--prev" aria-label="Previous animation">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button type="button" class="ai-player__nav ai-player__nav--next" aria-label="Next animation">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <div class="ai-player" id="ai-player">
+                    <div class="ai-player__topbar">
+                        <span class="ai-player__badge"><i class="fas fa-circle"></i> Up Next</span>
+                        <button type="button" class="ai-player__expand" id="ai-player-expand" aria-label="Open fullscreen">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                    <video class="ai-player__video"
+                           id="ai-player-video"
+                           preload="metadata"
+                           loop
+                           playsinline
+                           disablePictureInPicture
+                           disableRemotePlayback></video>
+                    <div class="ai-player__controls">
+                        <button type="button" class="ai-player__playbtn" id="ai-player-playbtn" aria-label="Play / Pause">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <div class="ai-player__progress" id="ai-player-progress">
+                            <div class="ai-player__progress-bar" id="ai-player-progress-bar"></div>
+                        </div>
+                        <span class="ai-player__time" id="ai-player-time">00:00 / 00:00</span>
+                    </div>
+                </div>
+
+                <div class="ai-player__dots" id="ai-player-dots"></div>
+            </div>
+
+            <!-- RIGHT: featured project info -->
+            <div class="ai-hero__right">
+                <span class="ai-eyebrow">Featured Animation</span>
+                <h2 class="ai-feature-title" id="ai-feature-title">Loading.</h2>
+                <p class="ai-feature-subtitle" id="ai-feature-subtitle">AI Character Study</p>
+                <p class="ai-feature-desc">
+                    A short character study, made via a hybrid pipeline of AI models, traditional animation principles, and a lot of late nights.
+                </p>
+                <dl class="ai-feature-meta">
+                    <div class="ai-feature-meta__row">
+                        <dt class="ai-feature-meta__label">Director</dt>
+                        <dd class="ai-feature-meta__value">Julio Salvat</dd>
+                    </div>
+                    <div class="ai-feature-meta__row">
+                        <dt class="ai-feature-meta__label">Year</dt>
+                        <dd class="ai-feature-meta__value">2026</dd>
+                    </div>
+                    <div class="ai-feature-meta__row">
+                        <dt class="ai-feature-meta__label">Category</dt>
+                        <dd class="ai-feature-meta__value">Cinematic, Character, AI</dd>
+                    </div>
+                </dl>
+                <a href="#stories" class="ai-feature-cta">
+                    Watch Case Study <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- STORIES RAIL ===================================== -->
+        <main>
+            <section id="stories" class="ai-stories">
+                <header class="ai-stories__header">
+                    <div class="ai-stories__heading-block">
+                        <span class="ai-stories__eyebrow">The Reel</span>
+                        <h2 class="ai-stories__title">More Stories,<br><span class="accent">Different Worlds.</span></h2>
+                    </div>
+                    <a href="/#work" class="ai-stories__explore">Explore All Work <i class="fas fa-arrow-right"></i></a>
+                </header>
+
+                <div class="ai-stories__rail-wrap">
+                    <div class="ai-stories__rail" id="ai-stories-rail">
+                        <!-- Cards injected via JS -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- MODAL ============================================ -->
+        <div class="modal fade video-modal" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="videoModalLabel">Playing</h5>
+                        <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <video id="modal-video" controls playsinline preload="metadata"></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      <footer class="footer">
+            <div class="footer__logo-box">
+                <img src="../img/jslogo.png" alt="Full logo" class="footer__logo">
+            </div>
+            <div class="row">
+                <div class="col-1-of-2">
+                    <div class="footer__navigation">
+                        <ul class="footer__list">
+                            <li class="footer__item"><a href="/" class="footer__link">Home</a></li>
+                            <li class="footer__item"><a href="/#about" class="footer__link">About</a></li>
+                            <li class="footer__item"><a href="/#experience" class="footer__link">Experience</a></li>
+                            <li class="footer__item"><a href="/#work" class="footer__link">Work</a></li>
+                            <li class="footer__item"><a href="/characters" class="footer__link">Characters</a></li>
+                            <li class="footer__item"><a href="/3d-character-design" class="footer__link">3D Characters</a></li>
+                            <li class="footer__item"><a href="/ai-generated-animation/" class="footer__link">Ai Animation</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-1-of-2">
+                    <p class="footer__copyright">
+                        Built by <a href="/" class="footer__link">Julio Salvat</a> |
+                        <a href="https://docs.google.com/document/d/1tZZN1nZQJm8iqCBtq3CQUeT3_z-C_UNji-mWtqlMhcM/edit?usp=sharing" target="_blank" class="footer__link">Resume</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <script src="../js/script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+        <script>
+        (function() {
+            'use strict';
+
+            // ====== Video manifest ======
+            const VIDEO_BASE = '../video/';
+            const VIDEOS = [
+                'devSapo.mp4',
+                'puggish.mp4',
+                'a_a_sapo.MP4',
+                'Baby-Dragon.mp4',
+                'a_inmate.mp4',
+                'a_RETF2.MP4',
+                'a_terror.mp4',
+                'assasin.mp4',
+                'b_searching.mp4',
+                'balarina.mp4',
+                'bike.mp4',
+                'CON.mp4',
+                'DSapoTalk.mp4',
+                'FuFrog.mp4',
+                'graf.mp4',
+                'guard.mp4',
+                'jimmy.mp4',
+                'a_b_greenTreefrog.mp4',
+                'kidSapo.mp4',
+                'ladySapo.mp4',
+                'lilDude.mp4',
+                'lizardRunning.mp4',
+                'M_sapoTalk.mp4',
+                'meerKat.mp4',
+                'rabbit.mp4',
+                'raffa.mp4',
+                'redEyeTreeFrog.mp4',
+                'sapi.mp4',
+                'sapo.mp4',
+                'sapoEating.mp4',
+                'SapoTalk.mp4',
+                'spaceDude.mp4',
+                'superDude.mp4',
+                'treefrog_a.mp4'
+            ];
+
+            // Filename -> nicer display title
+            function prettyTitle(filename) {
+                let name = filename.replace(/\.[^/.]+$/, '');
+                name = name.replace(/^[a-z]_/i, '');           // drop "a_", "b_", etc.
+                name = name.replace(/[_-]+/g, ' ');             // separators to spaces
+                name = name.replace(/([a-z])([A-Z])/g, '$1 $2');// camelCase split
+                name = name.replace(/\s+/g, ' ').trim();
+                if (!name) return filename;
+                return name.split(' ')
+                    .map(w => w.length <= 3 && w === w.toUpperCase()
+                        ? w
+                        : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+                    .join(' ');
+            }
+
+            function formatTime(t) {
+                if (!isFinite(t) || t < 0) t = 0;
+                const m = Math.floor(t / 60);
+                const s = Math.floor(t % 60);
+                return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+            }
+
+            // Desktop mirrors the mobile experience: always run the feed.
+            initTikTokFeed();
+            return;
+
+            function initDesktop() {
+                const rail = document.getElementById('ai-stories-rail');
+                const playerVideo = document.getElementById('ai-player-video');
+                const playerBtn = document.getElementById('ai-player-playbtn');
+                const playerProgress = document.getElementById('ai-player-progress');
+                const playerProgressBar = document.getElementById('ai-player-progress-bar');
+                const playerTime = document.getElementById('ai-player-time');
+                const playerExpand = document.getElementById('ai-player-expand');
+                const playerNavPrev = document.querySelector('.ai-player__nav--prev');
+                const playerNavNext = document.querySelector('.ai-player__nav--next');
+                const featureTitle = document.getElementById('ai-feature-title');
+                const featureSubtitle = document.getElementById('ai-feature-subtitle');
+                const dotsContainer = document.getElementById('ai-player-dots');
+
+                const modalEl = document.getElementById('videoModal');
+                const modalVideo = document.getElementById('modal-video');
+                const modalTitle = document.getElementById('videoModalLabel');
+                const bsModal = new bootstrap.Modal(modalEl);
+
+                // Featured rotation: all videos
+                const FEATURED_COUNT = VIDEOS.length;
+                let featuredIdx = 0;
+
+                // Audio autoplay: try unmuted; if blocked, fall back to muted and
+                // unmute on the user's first gesture anywhere on the page.
+                let audioUnlocked = false;
+                playerVideo.muted = false;
+                playerVideo.volume = 1;
+
+                function unlockAudioOnGesture() {
+                    if (audioUnlocked) return;
+                    audioUnlocked = true;
+                    if (playerVideo.muted) {
+                        playerVideo.muted = false;
+                        playerVideo.volume = 1;
+                        const p = playerVideo.play();
+                        if (p && typeof p.catch === 'function') p.catch(() => {});
+                    }
+                }
+                ['pointerdown', 'touchstart', 'keydown'].forEach(evt => {
+                    document.addEventListener(evt, unlockAudioOnGesture, { once: true, passive: true });
+                });
+
+                // --- Build dots ---
+                const dots = [];
+                for (let i = 0; i < FEATURED_COUNT; i++) {
+                    const dot = document.createElement('span');
+                    dot.className = 'ai-player__dot' + (i === 0 ? ' is-active' : '');
+                    dotsContainer.appendChild(dot);
+                    dots.push(dot);
+                }
+
+                // --- Build story rail (all videos) ---
+                const railCards = VIDEOS.map((filename, idx) => {
+                    const title = prettyTitle(filename);
+                    const src = VIDEO_BASE + encodeURIComponent(filename);
+
+                    const card = document.createElement('button');
+                    card.type = 'button';
+                    card.className = 'story-card';
+                    card.dataset.idx = idx;
+                    card.dataset.src = src;
+                    card.dataset.title = title;
+                    card.setAttribute('aria-label', 'Play ' + title);
+                    card.innerHTML = `
+                        <video class="story-card__media"
+                               src="${src}#t=0.5"
+                               preload="metadata"
+                               muted
+                               loop
+                               playsinline
+                               disablePictureInPicture
+                               disableRemotePlayback
+                               aria-hidden="true"></video>
+                        <span class="story-card__play" aria-hidden="true"><i class="fas fa-play"></i></span>
+                        <span class="story-card__playlabel">Play</span>
+                        <span class="story-card__overlay">
+                            <span class="story-card__meta">Animation ${String(idx + 1).padStart(2, '0')}</span>
+                            <h3 class="story-card__title">${title}</h3>
+                        </span>
+                    `;
+                    rail.appendChild(card);
+                    return card;
+                });
+
+                setupRailAutoScroll(rail);
+
+                // Mark the currently featured card as active in the rail
+                function syncActiveCard() {
+                    railCards.forEach((c, i) => c.classList.toggle('is-active', i === featuredIdx));
+                }
+
+                // --- Featured player controls ---
+                function loadFeatured(idx, autoplay) {
+                    if (idx < 0) idx = FEATURED_COUNT - 1;
+                    if (idx >= FEATURED_COUNT) idx = 0;
+                    featuredIdx = idx;
+                    const filename = VIDEOS[idx];
+                    const title = prettyTitle(filename);
+                    const src = VIDEO_BASE + encodeURIComponent(filename);
+
+                    playerVideo.src = src;
+                    playerVideo.load();
+                    featureTitle.textContent = title + '.';
+                    featureSubtitle.textContent = 'AI Character Study';
+
+                    dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+                    syncActiveCard();
+
+                    if (autoplay) {
+                        // Honor the current audio state (unmuted by default)
+                        playerVideo.muted = audioUnlocked ? false : playerVideo.muted;
+                        const p = playerVideo.play();
+                        if (p && typeof p.catch === 'function') {
+                            p.catch(() => {
+                                // Browser blocked unmuted autoplay — fall back to muted
+                                // so playback starts. First user gesture will unmute.
+                                playerVideo.muted = true;
+                                playerVideo.play().catch(() => {});
+                            });
+                        }
+                    }
+                }
+
+                function setPlayIcon(playing) {
+                    const i = playerBtn.querySelector('i');
+                    if (!i) return;
+                    if (playing) {
+                        i.classList.remove('fa-play');
+                        i.classList.add('fa-pause');
+                        playerBtn.classList.add('is-playing');
+                    } else {
+                        i.classList.remove('fa-pause');
+                        i.classList.add('fa-play');
+                        playerBtn.classList.remove('is-playing');
+                    }
+                }
+
+                playerBtn.addEventListener('click', () => {
+                    if (playerVideo.paused) {
+                        const p = playerVideo.play();
+                        if (p && typeof p.catch === 'function') p.catch(() => {});
+                    } else {
+                        playerVideo.pause();
+                    }
+                });
+
+                playerVideo.addEventListener('play',  () => setPlayIcon(true));
+                playerVideo.addEventListener('pause', () => setPlayIcon(false));
+
+                playerVideo.addEventListener('timeupdate', () => {
+                    if (!playerVideo.duration) return;
+                    const pct = (playerVideo.currentTime / playerVideo.duration) * 100;
+                    playerProgressBar.style.width = pct + '%';
+                    playerTime.textContent = formatTime(playerVideo.currentTime) + ' / ' + formatTime(playerVideo.duration);
+                });
+
+                playerVideo.addEventListener('loadedmetadata', () => {
+                    playerTime.textContent = formatTime(0) + ' / ' + formatTime(playerVideo.duration);
+                });
+
+                // Click on progress bar to seek
+                playerProgress.addEventListener('click', e => {
+                    if (!playerVideo.duration) return;
+                    const rect = playerProgress.getBoundingClientRect();
+                    const ratio = (e.clientX - rect.left) / rect.width;
+                    playerVideo.currentTime = Math.max(0, Math.min(1, ratio)) * playerVideo.duration;
+                });
+
+                playerNavPrev.addEventListener('click', () => loadFeatured(featuredIdx - 1, true));
+                playerNavNext.addEventListener('click', () => loadFeatured(featuredIdx + 1, true));
+
+                dots.forEach((dot, i) => {
+                    dot.addEventListener('click', () => loadFeatured(i, true));
+                });
+
+                // --- Story rail interactions ---
+                const supportsHover = window.matchMedia('(hover: hover)').matches;
+                if (supportsHover) {
+                    rail.addEventListener('mouseover', e => {
+                        const card = e.target.closest('.story-card');
+                        if (!card) return;
+                        // Play the card thumbnail preview
+                        const v = card.querySelector('video');
+                        if (v && v.paused) v.play().catch(() => {});
+                        // Swap into the featured player
+                        const idx = Number(card.dataset.idx);
+                        if (!isNaN(idx) && idx !== featuredIdx) {
+                            loadFeatured(idx, true);
+                        }
+                    });
+                    rail.addEventListener('mouseout', e => {
+                        const card = e.target.closest('.story-card');
+                        if (!card) return;
+                        const related = e.relatedTarget;
+                        if (related && card.contains(related)) return;
+                        const v = card.querySelector('video');
+                        if (v) {
+                            v.pause();
+                            try { v.currentTime = 0.5; } catch (_) {}
+                        }
+                    });
+                }
+
+                // Click any story-card to open modal at that video
+                rail.addEventListener('click', e => {
+                    const card = e.target.closest('.story-card');
+                    if (!card) return;
+                    openModal(card.dataset.src, card.dataset.title);
+                });
+
+                // Expand button opens the modal with current featured
+                playerExpand.addEventListener('click', () => {
+                    const filename = VIDEOS[featuredIdx];
+                    openModal(VIDEO_BASE + encodeURIComponent(filename), prettyTitle(filename));
+                });
+
+                // --- Modal handling (audio-friendly play inside user gesture) ---
+                const modalContent = modalEl.querySelector('.modal-content');
+                function fitModalToVideo() {
+                    const ratio = modalVideo.videoWidth / modalVideo.videoHeight;
+                    if (!ratio || !isFinite(ratio)) return;
+                    const maxH = window.innerHeight * 0.92;
+                    const maxW = window.innerWidth * 0.95;
+                    let w, h;
+                    h = maxH;
+                    w = h * ratio;
+                    if (w > maxW) {
+                        w = maxW;
+                        h = w / ratio;
+                    }
+                    modalContent.style.width = w + 'px';
+                    modalContent.style.height = h + 'px';
+                    modalContent.style.aspectRatio = ratio;
+                }
+                modalVideo.addEventListener('loadedmetadata', fitModalToVideo);
+                window.addEventListener('resize', () => {
+                    if (modalEl.classList.contains('show')) fitModalToVideo();
+                });
+
+                function openModal(src, title) {
+                    modalTitle.textContent = title;
+                    modalVideo.muted = false;
+                    modalVideo.volume = 1;
+                    modalContent.style.width = '';
+                    modalContent.style.height = '';
+                    modalVideo.src = src;
+                    modalVideo.load();
+                    const p = modalVideo.play();
+                    if (p && typeof p.catch === 'function') p.catch(() => {});
+                    bsModal.show();
+
+                    // Pause the featured player so audio doesn't overlap
+                    playerVideo.pause();
+                }
+
+                modalEl.addEventListener('hidden.bs.modal', () => {
+                    modalVideo.pause();
+                    modalVideo.removeAttribute('src');
+                    modalVideo.load();
+                });
+
+                // Keyboard: arrow keys advance featured
+                document.addEventListener('keydown', e => {
+                    if (e.target.closest('input, textarea')) return;
+                    if (modalEl.classList.contains('show')) return;
+                    if (e.key === 'ArrowLeft')  loadFeatured(featuredIdx - 1, true);
+                    if (e.key === 'ArrowRight') loadFeatured(featuredIdx + 1, true);
+                    if (e.key === ' ' || e.key === 'k') {
+                        e.preventDefault();
+                        playerBtn.click();
+                    }
+                });
+
+                // Initial load — first video, autoplay muted (allowed)
+                loadFeatured(0, true);
+            }
+
+            // ====== Mobile TikTok-style feed (UNCHANGED) ======
+            function initTikTokFeed() {
+                const feed = document.createElement('div');
+                feed.className = 'tiktok-feed';
+                feed.id = 'tiktok-feed';
+
+                VIDEOS.forEach((filename, idx) => {
+                    const title = prettyTitle(filename);
+                    const src = VIDEO_BASE + encodeURIComponent(filename);
+                    const item = document.createElement('div');
+                    item.className = 'tiktok-item';
+                    item.dataset.idx = idx;
+                    item.innerHTML = `
+                        <div class="tiktok-item__frame">
+                            <video class="tiktok-item__video"
+                                   src="${src}"
+                                   preload="none"
+                                   playsinline
+                                   webkit-playsinline
+                                   disablePictureInPicture
+                                   disableRemotePlayback></video>
+                            <span class="tiktok-item__badge"><i class="fas fa-robot"></i> AI</span>
+                            <span class="tiktok-item__playicon" aria-hidden="true"><i class="fas fa-play"></i></span>
+                            <div class="tiktok-progress"><div class="tiktok-progress__bar"></div></div>
+                            <div class="tiktok-item__overlay">
+                                <div class="tiktok-item__meta">Animation ${String(idx + 1).padStart(2, '0')}</div>
+                                <h3 class="tiktok-item__title">${title}</h3>
+                            </div>
+                        </div>
+                    `;
+                    feed.appendChild(item);
+                });
+
+                document.body.appendChild(feed);
+
+                let activeItem = null;
+                let soundOn = false;
+
+                // One-tap "enable sound" button. Chrome blocks autoplay-with-sound
+                // until the user interacts (scroll/wheel do NOT count), so when we
+                // can't start a video with sound we surface this. One tap unlocks
+                // audio for the whole session, after which every video — including
+                // when scrolling — plays with sound automatically.
+                const soundBtn = document.createElement('button');
+                soundBtn.type = 'button';
+                soundBtn.className = 'tiktok-sound';
+                soundBtn.innerHTML = '<i class="fas fa-volume-up"></i> Tap for sound';
+                document.body.appendChild(soundBtn);
+
+                soundBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    soundOn = true;
+                    soundBtn.classList.remove('is-visible');
+                    feed.querySelectorAll('video').forEach(v => {
+                        v.muted = false;
+                        v.removeAttribute('muted');
+                        v.volume = 1.0;
+                    });
+                    if (activeItem) {
+                        const v = activeItem.querySelector('video');
+                        if (v) v.play().catch(() => {});
+                    }
+                });
+
+                // Play a video WITH sound. If the browser blocks autoplay-with-
+                // sound, play that one muted (so it never stalls) and show the
+                // enable-sound button. As soon as audio is allowed (after the tap,
+                // or automatically on a trusted/high-engagement site), play()
+                // resolves and the button stays hidden.
+                function playWithSound(v) {
+                    if (!v) return;
+                    v.muted = false;
+                    v.removeAttribute('muted');
+                    v.volume = 1.0;
+                    const p = v.play();
+                    if (p && typeof p.then === 'function') {
+                        p.then(() => {
+                            soundOn = true;
+                            soundBtn.classList.remove('is-visible');
+                        }).catch(() => {
+                            v.muted = true;
+                            v.play().catch(() => {});
+                            if (!soundOn) soundBtn.classList.add('is-visible');
+                        });
+                    }
+                }
+
+                const hint = document.createElement('div');
+                hint.className = 'tiktok-hint';
+                hint.textContent = 'Swipe up for more';
+                document.body.appendChild(hint);
+                setTimeout(() => hint.remove(), 3500);
+
+                const items = Array.from(feed.querySelectorAll('.tiktok-item'));
+
+                // Scroll to a given item and play it (used by wheel/key nav and
+                // by auto-advance when a video finishes).
+                function goToIndex(idx) {
+                    idx = Math.max(0, Math.min(items.length - 1, idx));
+                    const item = items[idx];
+                    activeItem = item;
+                    feed.scrollTo({ top: idx * feed.clientHeight, behavior: 'smooth' });
+                    items.forEach(it => {
+                        if (it !== item) {
+                            const ov = it.querySelector('video');
+                            if (ov) ov.pause();
+                        }
+                    });
+                    const v = item.querySelector('video');
+                    if (!v) return;
+                    item.classList.remove('is-paused');
+                    playWithSound(v);
+                }
+                function currentIndex() {
+                    const i = activeItem ? items.indexOf(activeItem) : -1;
+                    return i !== -1 ? i : Math.round(feed.scrollTop / feed.clientHeight);
+                }
+
+                const preloadIO = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const v = entry.target.querySelector('video');
+                            if (v && v.preload !== 'auto') v.preload = 'auto';
+                        }
+                    });
+                }, { root: feed, rootMargin: '150% 0px 150% 0px' });
+                items.forEach(it => preloadIO.observe(it));
+
+                const playIO = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        const item = entry.target;
+                        const v = item.querySelector('video');
+                        if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+                            activeItem = item;
+                            item.classList.remove('is-paused');
+                            playWithSound(v);
+                        } else {
+                            v.pause();
+                            item.classList.remove('is-paused');
+                            if (entry.intersectionRatio === 0) {
+                                try { v.currentTime = 0; } catch (_) {}
+                                const bar = item.querySelector('.tiktok-progress__bar');
+                                if (bar) bar.style.width = '0%';
+                            }
+                        }
+                    });
+                }, { root: feed, threshold: [0, 0.6, 0.95] });
+                items.forEach(it => playIO.observe(it));
+
+                // A click only pauses / resumes the active video — nothing else.
+                feed.addEventListener('click', () => {
+                    if (!activeItem) return;
+                    const v = activeItem.querySelector('video');
+                    if (!v) return;
+                    if (v.paused) {
+                        v.play().catch(() => {});
+                        activeItem.classList.remove('is-paused');
+                    } else {
+                        v.pause();
+                        activeItem.classList.add('is-paused');
+                    }
+                });
+
+                // ===== Desktop: wheel / keyboard navigation =====
+                // A mouse wheel emits small deltas that mandatory scroll-snap
+                // snaps straight back, so the feed feels stuck. Drive the
+                // navigation ourselves, and turn audio ON (and keep it on)
+                // as part of the same gesture.
+                const isDesktop = window.matchMedia('(min-width: 769px)').matches;
+                if (isDesktop) {
+                    let wheelLock = false;
+                    feed.addEventListener('wheel', (e) => {
+                        e.preventDefault();
+                        if (wheelLock || Math.abs(e.deltaY) < 6) return;
+                        wheelLock = true;
+                        goToIndex(currentIndex() + (e.deltaY > 0 ? 1 : -1));
+                        setTimeout(() => { wheelLock = false; }, 550);
+                    }, { passive: false });
+
+                    document.addEventListener('keydown', (e) => {
+                        if (e.target.closest('input, textarea')) return;
+                        const next = e.key === 'ArrowDown' || e.key === 'PageDown';
+                        const prev = e.key === 'ArrowUp' || e.key === 'PageUp';
+                        if (!next && !prev) return;
+                        e.preventDefault();
+                        goToIndex(currentIndex() + (next ? 1 : -1));
+                    });
+                }
+
+                items.forEach((item, idx) => {
+                    const v = item.querySelector('video');
+                    const bar = item.querySelector('.tiktok-progress__bar');
+                    v.addEventListener('timeupdate', () => {
+                        if (v.duration) {
+                            bar.style.width = (v.currentTime / v.duration * 100) + '%';
+                        }
+                    });
+                    // When a video finishes, auto-scroll to the next and play it
+                    // (loop back to the first after the last).
+                    v.addEventListener('ended', () => {
+                        if (item !== activeItem) return;
+                        goToIndex(idx + 1 >= items.length ? 0 : idx + 1);
+                    });
+                });
+
+                document.addEventListener('visibilitychange', () => {
+                    if (!activeItem) return;
+                    const v = activeItem.querySelector('video');
+                    if (!v) return;
+                    if (document.hidden) v.pause();
+                    else v.play().catch(() => {});
+                });
+            }
+        })();
+
+        function setupRailAutoScroll(rail) {
+            if (!rail) return;
+            if (window.matchMedia('(hover: none)').matches) return;
+            const wrap = rail.parentElement;
+            if (!wrap) return;
+            if (getComputedStyle(wrap).position === 'static') {
+                wrap.style.position = 'relative';
+            }
+            const EDGE_PX = 90;
+            const SPEED = 7;
+            let raf = null;
+            let dir = 0;
+
+            function makeHint(side) {
+                const el = document.createElement('div');
+                el.className = 'rail-edge-hint rail-edge-hint--' + side;
+                el.setAttribute('aria-hidden', 'true');
+                const icon = document.createElement('i');
+                icon.className = 'fas fa-chevron-' + side;
+                el.appendChild(icon);
+                return el;
+            }
+            const leftHint = makeHint('left');
+            const rightHint = makeHint('right');
+            wrap.appendChild(leftHint);
+            wrap.appendChild(rightHint);
+
+            function step() {
+                if (!dir) { raf = null; return; }
+                rail.scrollLeft += dir * SPEED;
+                const max = rail.scrollWidth - rail.clientWidth;
+                if ((dir > 0 && rail.scrollLeft >= max) || (dir < 0 && rail.scrollLeft <= 0)) {
+                    dir = 0;
+                    raf = null;
+                    syncHints();
+                    return;
+                }
+                raf = requestAnimationFrame(step);
+            }
+            function start(d) {
+                if (dir === d) return;
+                dir = d;
+                rail.style.scrollSnapType = 'none';
+                if (!raf) raf = requestAnimationFrame(step);
+                syncHints();
+            }
+            function stop() {
+                if (dir === 0 && !raf) return;
+                dir = 0;
+                if (raf) cancelAnimationFrame(raf);
+                raf = null;
+                rail.style.scrollSnapType = '';
+                syncHints();
+            }
+            function syncHints() {
+                leftHint.classList.toggle('is-active', dir < 0);
+                rightHint.classList.toggle('is-active', dir > 0);
+            }
+
+            rail.addEventListener('mousemove', e => {
+                const rect = rail.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const max = rail.scrollWidth - rail.clientWidth;
+                if (max <= 0) { stop(); return; }
+                if (x > rect.width - EDGE_PX && rail.scrollLeft < max - 1) {
+                    start(1);
+                } else if (x < EDGE_PX && rail.scrollLeft > 0) {
+                    start(-1);
+                } else {
+                    stop();
+                }
+            });
+            rail.addEventListener('mouseleave', stop);
+        }
+        </script>
+    </body>
+</html>
