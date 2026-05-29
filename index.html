@@ -2136,5 +2136,251 @@
             tick();
         })();
         </script>
+
+        <!-- ====== Click-here video popup (bottom-right) ====== -->
+        <style>
+            .click-here-popup {
+                position: fixed;
+                right: 20px;
+                bottom: 24px;
+                z-index: 9999;
+                box-sizing: content-box;
+                width: 300px;
+                height: 300px;
+                max-width: 60vw;
+                border-radius: 50%;
+                overflow: hidden;
+                border: 20px solid rgba(255, 255, 255, 0.65);
+                -webkit-backdrop-filter: blur(12px);
+                backdrop-filter: blur(12px);
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+                background: rgba(0, 0, 0, 0.15);
+                cursor: pointer;
+                transform: translateY(calc(100% + 24px));
+                transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+                pointer-events: none;
+            }
+            .click-here-popup.is-visible {
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+            .click-here-popup__video {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .click-here-popup__cue {
+                position: absolute;
+                inset: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                background: rgba(0, 0, 0, 0.35);
+                color: #fff;
+                font-family: 'Lato', sans-serif;
+                text-align: center;
+                pointer-events: none;
+            }
+            .click-here-popup__cue-icon {
+                width: 56px;
+                height: 56px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.18);
+                border: 2px solid #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 22px;
+                animation: clickHerePulse 1.6s ease-in-out infinite;
+            }
+            .click-here-popup__cue-text {
+                font-size: 13px;
+                font-weight: 700;
+                letter-spacing: 0.04em;
+                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+            }
+            @keyframes clickHerePulse {
+                0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5); }
+                50%      { transform: scale(1.08); box-shadow: 0 0 0 12px rgba(255, 255, 255, 0); }
+            }
+            .click-here-popup.is-playing .click-here-popup__cue { display: none; }
+            .click-here-popup__cta {
+                position: absolute;
+                left: 50%;
+                bottom: 48px;
+                transform: translate(-50%, 12px);
+                padding: 12px 40px;
+                white-space: nowrap;
+                border: none;
+                border-radius: 999px;
+                background: #fff;
+                color: #007df9;
+                font-family: 'Lato', sans-serif;
+                font-size: 15px;
+                font-weight: 900;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                cursor: pointer;
+                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.35s ease, transform 0.35s ease;
+                z-index: 2;
+                animation: clickHereCtaPulse 1.4s ease-in-out infinite;
+            }
+            .click-here-popup.is-cta-visible .click-here-popup__cta {
+                opacity: 1;
+                transform: translate(-50%, 0);
+                pointer-events: auto;
+            }
+            .click-here-popup__cta:hover { background: #f0f0f0; }
+            @keyframes clickHereCtaPulse {
+                0%, 100% { box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(0, 125, 249, 0.6); }
+                50%      { box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5), 0 0 0 10px rgba(0, 125, 249, 0); }
+            }
+            .click-here-popup__close {
+                position: absolute;
+                top: 8px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 34px;
+                height: 34px;
+                border: none;
+                border-radius: 50%;
+                background: rgba(0, 0, 0, 0.6);
+                color: #fff;
+                font-size: 20px;
+                line-height: 34px;
+                text-align: center;
+                cursor: pointer;
+                z-index: 3;
+            }
+            .click-here-popup__close:hover {
+                background: rgba(0, 0, 0, 0.85);
+            }
+            @media (max-width: 600px) {
+                .click-here-popup {
+                    width: 80vw;
+                    height: 80vw;
+                    max-width: 340px;
+                    max-height: 340px;
+                    left: 50%;
+                    top: 50%;
+                    right: auto;
+                    bottom: auto;
+                    transform: translate(-50%, -50%) scale(0.9);
+                    opacity: 0;
+                    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+                }
+                .click-here-popup.is-visible {
+                    transform: translate(-50%, -50%) scale(1);
+                    opacity: 1;
+                }
+                .click-here-popup__cta { padding: 10px 28px; font-size: 13px; }
+            }
+        </style>
+        <div class="click-here-popup" id="click-here-popup" role="button" tabindex="0"
+             aria-label="Click to play the AI animation video with sound">
+            <button class="click-here-popup__close" id="click-here-close" type="button"
+                    aria-label="Close video">&times;</button>
+            <video class="click-here-popup__video" id="click-here-video"
+                   src="video/clickHere.mp4" playsinline preload="auto"></video>
+            <div class="click-here-popup__cue" id="click-here-cue">
+                <span class="click-here-popup__cue-icon">&#128266;</span>
+                <span class="click-here-popup__cue-text">Click to play</span>
+            </div>
+            <button class="click-here-popup__cta" id="click-here-cta" type="button">Click Here</button>
+        </div>
+        <script>
+        (function() {
+            'use strict';
+            var popup = document.getElementById('click-here-popup');
+            var video = document.getElementById('click-here-video');
+            var closeBtn = document.getElementById('click-here-close');
+            var ctaBtn = document.getElementById('click-here-cta');
+            if (!popup || !video) return;
+
+            var TARGET_URL = 'ai-generated-animation/';
+            var DELAY_MS = 3000;       // show popup this long after first scroll/link click
+            var CTA_DELAY_MS = 2000;   // show "Click Here" button this long after video starts
+            var triggered = false;
+            var dismissed = false;
+            var ctaArmed = false;
+            var timerId = null;
+            var ctaTimerId = null;
+
+            function showPopup() {
+                if (dismissed) return;
+                popup.classList.add('is-visible');
+            }
+
+            function arm() {
+                if (triggered) return;
+                triggered = true;
+                window.removeEventListener('scroll', arm);
+                document.removeEventListener('click', onLinkClick, true);
+                timerId = window.setTimeout(showPopup, DELAY_MS);
+            }
+
+            function onLinkClick(event) {
+                if (event.target.closest && event.target.closest('a')) {
+                    arm();
+                }
+            }
+
+            function dismiss() {
+                dismissed = true;
+                popup.classList.remove('is-visible');
+                video.pause();
+                if (timerId) window.clearTimeout(timerId);
+                if (ctaTimerId) window.clearTimeout(ctaTimerId);
+            }
+
+            // Start video AND audio together on the user's click.
+            function playWithSound() {
+                popup.classList.add('is-playing');
+                video.muted = false;
+                video.currentTime = 0;
+                var attempt = video.play();
+                if (attempt && typeof attempt.catch === 'function') {
+                    attempt.catch(function() {});
+                }
+                // Reveal the "Click Here" button 5s after playback starts.
+                if (!ctaArmed) {
+                    ctaArmed = true;
+                    ctaTimerId = window.setTimeout(function() {
+                        popup.classList.add('is-cta-visible');
+                    }, CTA_DELAY_MS);
+                }
+            }
+
+            window.addEventListener('scroll', arm, { passive: true });
+            document.addEventListener('click', onLinkClick, true);
+
+            popup.addEventListener('click', function(event) {
+                if (event.target === closeBtn) return;
+                playWithSound();
+            });
+            popup.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    playWithSound();
+                }
+            });
+            closeBtn.addEventListener('click', function(event) {
+                event.stopPropagation();
+                dismiss();
+            });
+            if (ctaBtn) {
+                ctaBtn.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    window.location.href = TARGET_URL;
+                });
+            }
+        })();
+        </script>
     </body>
 </html>
